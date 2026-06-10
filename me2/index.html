@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <title>Hanaa - Creative Designer</title>
+
+    <meta name="description" content="Hanaa Portfolio - مصممة جرافيك" />
+    <meta name="author" content="Hanaa" />
+     <link rel="icon" type="image/png" sizes="32x32" href="https://mentra-tech.pages.dev/assets/logo.png">
+    <!-- Google Fonts (Inter for EN, Tajawal for AR) -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- Tailwind CSS v4 Configuration -->
+    <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
+      @theme {
+        --default-font-family: "Tajawal", "Inter", sans-serif;
+      }
+      
+      /* تخصيص لون التحديد */
+      ::selection {
+        background-color: #a855f7;
+        color: white;
+      }
+    </style>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+      [x-cloak] { display: none !important; }
+      body { transition: background-color 0.4s ease, color 0.4s ease; }
+      /* تأثير الزجاج للهيدر */
+      .glass-header {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .dark .glass-header {
+        background: rgba(9, 9, 11, 0.8);
+      }
+    </style>
+  </head>
+
+  <body class="antialiased bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
+    
+    <div x-data="portfolio()" class="min-h-dvh flex flex-col">
+      
+      <!-- Header (Sticky & Glassmorphism) -->
+      <header class="glass-header sticky top-0 z-50 border-b border-zinc-200/50 dark:border-zinc-800/50 transition-colors duration-300">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-8">
+          <div class="flex items-center gap-4">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-80 transition" x-text="t[lang].logo"></a>
+            
+            <!-- Language Toggle -->
+            <button x-on:click="toggleLang()" class="text-xs font-bold uppercase tracking-wider bg-zinc-200/50 dark:bg-zinc-800/50 px-3 py-1.5 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all text-zinc-700 dark:text-zinc-300 shadow-sm">
+              <span x-show="lang === 'en'">عربي</span>
+              <span x-show="lang === 'ar'">EN</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-5">
+            <!-- Nav Links -->
+            <nav class="hidden sm:flex items-center gap-6">
+              <a href="#projects" class="text-sm font-semibold hover:text-purple-600 dark:hover:text-purple-400 transition-colors" x-text="t[lang].projects"></a>
+              <a href="#contact" class="text-sm font-semibold hover:text-purple-600 dark:hover:text-purple-400 transition-colors" x-text="t[lang].hireMe"></a>
+            </nav>
+
+            <!-- Dark Mode Toggle -->
+            <button x-on:click="toggleDarkMode()" type="button" class="relative inline-flex size-9 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 hover:text-purple-600 dark:text-zinc-400 dark:hover:text-purple-400 transition-all shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800">
+              <div x-cloak x-show="!darkMode" x-transition.opacity.duration.300ms class="absolute">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+              </div>
+              <div x-cloak x-show="darkMode" x-transition.opacity.duration.300ms class="absolute">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="mx-auto w-full max-w-6xl flex-auto px-4 py-8 lg:px-8 lg:py-12">
+        
+        <!-- Grid Layout (Bento Box Style) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Profile Photo -->
+          <div class="col-span-1 relative group overflow-hidden rounded-3xl shadow-xl shadow-zinc-200/50 dark:shadow-black/50">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Hanaa" loading="lazy" class="h-full w-full object-cover aspect-square md:aspect-auto group-hover:scale-105 transition-transform duration-500 ease-out" />
+          </div>
+
+          <!-- Intro Box -->
+          <div class="col-span-1 lg:col-span-2 relative flex flex-col justify-center overflow-hidden rounded-3xl bg-white p-8 sm:p-12 shadow-xl shadow-zinc-200/50 dark:bg-zinc-900/80 dark:shadow-black/50 border border-zinc-100 dark:border-zinc-800">
+            <!-- Blurred Glow Effects -->
+            <div aria-hidden="true" class="absolute -top-20 -start-20 size-64 rounded-full bg-purple-500/20 blur-3xl"></div>
+            <div aria-hidden="true" class="absolute -bottom-20 -end-20 size-64 rounded-full bg-pink-500/20 blur-3xl"></div>
+            
+            <div class="relative z-10">
+              <span class="inline-block py-1 px-3 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 text-sm font-bold mb-4" x-text="t[lang].badge"></span>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-900 dark:text-white leading-tight" x-text="t[lang].heroTitle"></h1>
+              <p class="mt-6 text-lg sm:text-xl leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium" x-text="t[lang].heroDesc"></p>
+              
+              <div class="mt-8 flex gap-4">
+                <a href="#contact" class="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-6 py-3.5 text-sm font-bold text-white hover:bg-zinc-800 hover:-translate-y-1 transition-all shadow-lg dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200" x-text="t[lang].hireMe"></a>
+                <a href="#projects" class="inline-flex items-center justify-center rounded-xl bg-zinc-100 px-6 py-3.5 text-sm font-bold text-zinc-900 hover:bg-zinc-200 hover:-translate-y-1 transition-all dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700" x-text="t[lang].projects"></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Projects -->
+          <template x-for="(project, index) in projectsList" :key="index">
+            <a href="javascript:void(0)" class="group relative col-span-1 overflow-hidden rounded-3xl bg-white p-4 shadow-md hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-1 dark:bg-zinc-900 dark:border-zinc-800 border border-zinc-100">
+              <div class="absolute top-6 end-6 z-20 flex size-10 items-center justify-center rounded-full bg-white/90 text-zinc-900 backdrop-blur-sm scale-0 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 rtl:rotate-180"><path fill-rule="evenodd" d="M3.75 12a.75.75 0 0 1 .75-.75h13.19l-5.47-5.47a.75.75 0 0 1 1.06-1.06l6.75 6.75a.75.75 0 0 1 0 1.06l-6.75 6.75a.75.75 0 1 1-1.06-1.06l5.47-5.47H4.5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" /></svg>
+              </div>
+              
+              <div class="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                <img :src="project.img" :alt="project.title[lang]" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              </div>
+              <div class="mt-5 px-2 pb-2">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-white" x-text="project.title[lang]"></h3>
+                <p class="mt-1 text-sm font-medium text-purple-600 dark:text-purple-400" x-text="project.category[lang]"></p>
+              </div>
+            </a>
+          </template>
+
+          <!-- Contact Form Section -->
+          <div id="contact" class="col-span-1 md:col-span-2 lg:col-span-3 relative overflow-hidden rounded-3xl bg-zinc-900 px-6 py-16 sm:px-16 sm:py-24 text-center dark:bg-zinc-900/80 shadow-2xl mt-6 border border-zinc-800">
+            <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-pink-600/20"></div>
+            
+            <div class="relative z-10 mx-auto max-w-2xl">
+              <h2 class="text-3xl sm:text-5xl font-black text-white" x-text="t[lang].contactTitle"></h2>
+              <p class="mt-4 text-lg text-zinc-300 font-medium leading-relaxed" x-text="t[lang].contactDesc"></p>
+              
+              <form @submit.prevent="sendToWhatsApp" class="mt-10 space-y-5 text-start">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-zinc-300 ms-1" x-text="t[lang].formName"></label>
+                    <input type="text" x-model="form.name" required :placeholder="t[lang].namePlaceholder" class="w-full rounded-xl bg-zinc-800/50 border border-zinc-700 px-5 py-3.5 text-white placeholder-zinc-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 outline-none transition-all backdrop-blur-sm" />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-zinc-300 ms-1" x-text="t[lang].formEmail"></label>
+                    <input type="email" x-model="form.email" :placeholder="t[lang].emailPlaceholder" class="w-full rounded-xl bg-zinc-800/50 border border-zinc-700 px-5 py-3.5 text-white placeholder-zinc-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 outline-none transition-all backdrop-blur-sm" />
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-zinc-300 ms-1" x-text="t[lang].formMessage"></label>
+                  <textarea x-model="form.message" required rows="4" :placeholder="t[lang].messagePlaceholder" class="w-full rounded-xl bg-zinc-800/50 border border-zinc-700 px-5 py-3.5 text-white placeholder-zinc-500 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 outline-none transition-all backdrop-blur-sm resize-none"></textarea>
+                </div>
+                
+                <!-- WhatsApp Professional Button -->
+                <button type="submit" class="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] px-8 py-4 text-base font-bold text-white transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-[#25D366]/30 overflow-hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16" class="relative z-10 group-hover:animate-bounce"> <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/> </svg>
+                  <span class="relative z-10" x-text="t[lang].sendBtn"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+        <!-- END Grid -->
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="mt-auto border-t border-zinc-200/50 dark:border-zinc-800/50 bg-white/50 dark:bg-zinc-950/50 py-8">
+        <div class="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 md:flex-row md:justify-between lg:px-8">
+          
+          <div class="text-zinc-500 dark:text-zinc-400 font-medium text-sm">
+            <span class="font-bold text-zinc-900 dark:text-white" x-text="t[lang].logo"></span> © <span x-text="new Date().getFullYear()"></span>
+            <span class="mx-1" x-text="t[lang].rights"></span>
+          </div>
+
+          <!-- Social Icons -->
+          <nav class="flex items-center gap-5">
+            <a href="#" class="text-zinc-400 hover:text-pink-500 hover:-translate-y-1 transition-all"><svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></a>
+            <a href="#" class="text-zinc-400 hover:text-blue-500 hover:-translate-y-1 transition-all"><svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/></svg></a>
+            <a href="#" class="text-zinc-400 hover:text-[#ea4c89] hover:-translate-y-1 transition-all"><svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm9.885 11.441c-2.575-.422-4.943-.445-7.103-.073a42.153 42.153 0 00-.767-1.68c2.31-1 4.165-2.358 5.548-4.082a9.863 9.863 0 012.322 5.835zm-3.842-7.282c-1.205 1.554-2.868 2.783-4.986 3.68a46.287 46.287 0 00-3.488-5.438A9.894 9.894 0 0112 2.087c2.275 0 4.368.779 6.043 2.072zM7.527 3.166a44.59 44.59 0 013.537 5.381c-2.43.715-5.331 1.082-8.684 1.105a9.931 9.931 0 015.147-6.486zM2.087 12l.013-.256c3.849-.005 7.169-.448 9.95-1.322.233.475.456.952.67 1.432-3.38 1.057-6.165 3.222-8.337 6.48A9.865 9.865 0 012.087 12zm3.829 7.81c1.969-3.088 4.482-5.098 7.598-6.027a39.137 39.137 0 012.043 7.46c-3.349 1.291-6.953.666-9.641-1.433zm11.586.43a41.098 41.098 0 00-1.92-6.897c1.876-.265 3.94-.196 6.199.196a9.923 9.923 0 01-4.279 6.701z"></path></svg></a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('portfolio', () => ({
+          darkMode: false,
+          lang: 'ar', 
+          whatsappNumber: '201211934816', // <-- ضع رقمك هنا (بدون +)
+          
+          form: { name: '', email: '', message: '' },
+
+          t: {
+            ar: {
+              logo: 'هناء.',
+              projects: 'أعمالي',
+              hireMe: 'تواصل معي',
+              badge: 'متاح للعمل الحر 👋',
+              heroTitle: 'أصمم تجارب مرئية تترك أثراً لا يُنسى.',
+              heroDesc: 'أنا هناء، مصممة جرافيك بخبرة 5+ سنوات. أساعد العلامات التجارية على إيصال رسالتها من خلال هويات بصرية قوية وتصاميم عصرية جذابة.',
+              contactTitle: 'لنبدأ مشروعك القادم!',
+              contactDesc: 'شاركني أفكارك، وسأقوم بتحويلها إلى واقع ملموس واحترافي. يمكنك ملء النموذج أدناه أو مراسلتي مباشرة عبر الواتساب.',
+              formName: 'الاسم الكريم',
+              namePlaceholder: 'أحمد محمد...',
+              formEmail: 'البريد الإلكتروني (اختياري)',
+              emailPlaceholder: 'example@mail.com',
+              formMessage: 'تفاصيل المشروع',
+              messagePlaceholder: 'أحتاج إلى تصميم هوية بصرية لشركة متخصصة في...',
+              sendBtn: 'إرسال الرسالة عبر واتساب',
+              rights: 'جميع الحقوق محفوظة.'
+            },
+            en: {
+              logo: 'Hanaa.',
+              projects: 'Portfolio',
+              hireMe: 'Let\'s Talk',
+              badge: 'Available for freelance 👋',
+              heroTitle: 'I craft visual experiences that leave a mark.',
+              heroDesc: 'I’m Hanaa, a graphic designer with 5+ years of experience. I help brands communicate their message through bold identities and modern designs.',
+              contactTitle: 'Let’s build something great!',
+              contactDesc: 'Share your ideas with me, and I’ll turn them into a professional reality. Fill out the form or message me directly on WhatsApp.',
+              formName: 'Your Name',
+              namePlaceholder: 'John Doe...',
+              formEmail: 'Email Address (Optional)',
+              emailPlaceholder: 'example@mail.com',
+              formMessage: 'Project Details',
+              messagePlaceholder: 'I need a brand identity for my new startup...',
+              sendBtn: 'Send via WhatsApp',
+              rights: 'All rights reserved.'
+            }
+          },
+
+          projectsList: [
+            { title: { ar: 'تطبيق محفظة ذكية', en: 'Smart Wallet App' }, category: { ar: 'تصميم واجهات UI/UX', en: 'UI/UX Design' }, img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop' },
+            { title: { ar: 'هوية بصرية لمقهى', en: 'Cafe Brand Identity' }, category: { ar: 'العلامات التجارية', en: 'Branding' }, img: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop' },
+            { title: { ar: 'رسومات تجريدية', en: 'Abstract Illustrations' }, category: { ar: 'رسم رقمي', en: 'Digital Art' }, img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop' },
+            { title: { ar: 'تصميم أغلفة منتجات', en: 'Product Packaging' }, category: { ar: 'طباعة وتغليف', en: 'Print & Packaging' }, img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop' },
+            { title: { ar: 'بوسترات سوشيال ميديا', en: 'Social Media Posters' }, category: { ar: 'تسويق رقمي', en: 'Digital Marketing' }, img: 'https://images.unsplash.com/photo-1572044162444-ad60f128bdea?q=80&w=800&auto=format&fit=crop' }
+          ],
+
+          init() {
+            this.updateLang();
+            this.$watch('lang', () => this.updateLang());
+          },
+
+          updateLang() {
+            document.documentElement.dir = this.lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = this.lang;
+            document.documentElement.style.fontFamily = this.lang === 'ar' ? '"Tajawal", sans-serif' : '"Inter", sans-serif';
+          },
+
+          toggleDarkMode() {
+            this.darkMode = !this.darkMode;
+            document.documentElement.classList.toggle('dark', this.darkMode);
+          },
+
+          toggleLang() {
+            this.lang = this.lang === 'en' ? 'ar' : 'en';
+          },
+
+          sendToWhatsApp() {
+            if (!this.form.name || !this.form.message) return;
+            let text = this.lang === 'ar' 
+              ? `مرحباً هناء، 👋\n\n*الاسم:* ${this.form.name}\n${this.form.email ? `*البريد:* ${this.form.email}\n` : ''}\n*الرسالة:*\n${this.form.message}`
+              : `Hello Hanaa, 👋\n\n*Name:* ${this.form.name}\n${this.form.email ? `*Email:* ${this.form.email}\n` : ''}\n*Message:*\n${this.form.message}`;
+
+            window.open(`https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+          }
+        }));
+      });
+    </script>
+  </body>
+</html>

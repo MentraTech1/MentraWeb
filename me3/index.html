@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Hany - UI/UX Designer Portfolio</title>
+     <link rel="icon" type="image/png" sizes="32x32" href="https://mentra-tech.pages.dev/assets/logo.png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <!-- Poppins for English, Cairo for Arabic -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files (via CDN for instant preview) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Alpine.js for Logic -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Custom CSS for Premium Look & RTL/LTR -->
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #0ea5e9;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif; /* Default AR */
+      transition: all 0.3s ease;
+      overflow-x: hidden;
+    }
+    html[lang="en"] body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    [x-cloak] { display: none !important; }
+
+    /* Header & Nav */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      padding: 15px 0;
+      transition: all 0.3s;
+    }
+    .sitename {
+      font-weight: 800;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .navmenu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navmenu a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    .navmenu a:hover, .navmenu a.active {
+      color: var(--primary-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1920&auto=format&fit=crop') top center no-repeat;
+      background-size: cover;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+    }
+    html[dir="rtl"] .hero::before {
+      background: linear-gradient(to left, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+    }
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+    .hero h2 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #e2e8f0;
+    }
+
+    /* WhatsApp Button Premium */
+    .btn-whatsapp {
+      background: linear-gradient(45deg, #25D366, #128C7E);
+      color: white;
+      font-weight: bold;
+      padding: 12px 30px;
+      border-radius: 50px;
+      border: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+      color: white;
+    }
+
+    /* Utilities */
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-top: 80px;
+    }
+    .section-title h2 {
+      font-weight: 800;
+      color: #1e293b;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: var(--primary-color);
+    }
+    
+    /* Contact Form */
+    .contact-card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+    .form-control {
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    /* Lang Toggle */
+    .lang-toggle {
+      background: #f1f5f9;
+      color: #333;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .lang-toggle:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+  </style>
+</head>
+
+<body x-data="portfolioData()">
+
+  <!-- Header -->
+  <header class="header fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+      
+      <a href="#" class="logo text-decoration-none">
+        <h1 class="sitename" x-text="t[lang].logo"></h1>
+      </a>
+
+      <div class="d-flex align-items-center gap-4">
+        <nav class="navmenu d-none d-lg-block">
+          <ul>
+            <li><a href="#hero" x-text="t[lang].navHome"></a></li>
+            <li><a href="#about" x-text="t[lang].navAbout"></a></li>
+            <li><a href="#services" x-text="t[lang].navServices"></a></li>
+            <li><a href="#contact" x-text="t[lang].navContact"></a></li>
+          </ul>
+        </nav>
+
+        <!-- Language Toggle -->
+        <button @click="toggleLang()" class="lang-toggle">
+          <span x-show="lang === 'en'">عربي</span>
+          <span x-show="lang === 'ar'">EN</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h2 x-text="t[lang].heroName"></h2>
+        <p x-text="t[lang].heroRole"></p>
+        <a href="#contact" class="btn-whatsapp mt-3 text-decoration-none">
+          <span x-text="t[lang].heroBtn"></span>
+          <i class="bi bi-arrow-right-circle ms-2" :class="lang === 'ar' ? 'bi-arrow-left-circle' : 'bi-arrow-right-circle'"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section py-5 bg-light">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 x-text="t[lang].navAbout"></h2>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 justify-content-between align-items-center">
+          <div class="col-lg-5">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" class="img-fluid rounded-4 shadow-lg" alt="Hany Profile">
+          </div>
+          <div class="col-lg-6 content">
+            <h3 class="fw-bold mb-4" x-text="t[lang].aboutTitle" style="color: var(--primary-color);"></h3>
+            <p class="fs-5 text-secondary mb-4" x-text="t[lang].aboutDesc"></p>
+            
+            <div class="row gy-3">
+              <template x-for="(skill, index) in t[lang].skills" :key="index">
+                <div class="col-sm-6">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <span class="fw-semibold" x-text="skill"></span>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section py-5">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 x-text="t[lang].navServices"></h2>
+        <p class="text-secondary mt-2" x-text="t[lang].servicesSub"></p>
+      </div>
+
+      <div class="container">
+        <div class="row gy-4">
+          <template x-for="(service, index) in t[lang].servicesList" :key="index">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" :data-aos-delay="100 * (index + 1)">
+              <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift" style="border-radius: 20px; transition: transform 0.3s;">
+                <div class="icon mb-3 text-primary fs-1" x-html="service.icon"></div>
+                <h4 class="fw-bold mb-3" x-text="service.title"></h4>
+                <p class="text-secondary" x-text="service.desc"></p>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section (WhatsApp Integration) -->
+    <section id="contact" class="section py-5 bg-light">
+      <div class="container section-title" data-aos="fade-up">
+        <h2 x-text="t[lang].navContact"></h2>
+        <p class="text-secondary mt-2" x-text="t[lang].contactSub"></p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="contact-card">
+              <form @submit.prevent="sendToWhatsApp" class="row gy-4">
+                
+                <div class="col-md-6">
+                  <label class="fw-bold mb-2" x-text="t[lang].formName"></label>
+                  <input type="text" x-model="form.name" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="fw-bold mb-2" x-text="t[lang].formEmail"></label>
+                  <input type="email" x-model="form.email" class="form-control">
+                </div>
+
+                <div class="col-12">
+                  <label class="fw-bold mb-2" x-text="t[lang].formMessage"></label>
+                  <textarea x-model="form.message" class="form-control" rows="5" required></textarea>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                  <button type="submit" class="btn-whatsapp w-100 justify-content-center py-3 fs-5">
+                    <i class="bi bi-whatsapp fs-4"></i>
+                    <span x-text="t[lang].sendBtn"></span>
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="py-4 text-center bg-white border-top">
+    <div class="container">
+      <h3 class="fw-bold" style="color: var(--primary-color);" x-text="t[lang].logo"></h3>
+      <p class="text-secondary mt-2">
+        &copy; <span x-text="new Date().getFullYear()"></span> <strong x-text="t[lang].logo"></strong>. <span x-text="t[lang].rights"></span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // Initialize Animations
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Alpine.js Logic
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('portfolioData', () => ({
+        lang: 'ar', // الافتراضي عربي
+        whatsappNumber: '201211934816', // <=== ضع رقم الواتساب هنا شامل كود الدولة بدون علامة +
+        
+        form: {
+          name: '',
+          email: '',
+          message: ''
+        },
+
+        // قاموس الترجمة
+        t: {
+          ar: {
+            logo: 'هاني.',
+            navHome: 'الرئيسية',
+            navAbout: 'من أنا',
+            navServices: 'خدماتي',
+            navContact: 'تواصل معي',
+            heroName: 'مرحباً، أنا هاني',
+            heroRole: 'مصمم ومطور واجهات مستخدم (UI/UX) أبتكر تجارب رقمية استثنائية.',
+            heroBtn: 'لنتحدث عن مشروعك',
+            aboutTitle: 'أصمم واجهات نظيفة، بسيطة، وفريدة.',
+            aboutDesc: 'أنا هاني، شغوف بتصميم واجهات المستخدم وتجربة المستخدم. أساعد الشركات والأفراد على تحويل أفكارهم إلى منتجات رقمية جذابة وسهلة الاستخدام.',
+            skills: ['تصميم واجهات UI/UX', 'تطوير واجهات (Front-end)', 'تصميم هويات بصرية', 'تصميم تطبيقات الموبايل'],
+            servicesSub: 'حلول إبداعية متكاملة لنجاح مشروعك الرقمي',
+            servicesList: [
+              { icon: '<i class="bi bi-phone"></i>', title: 'تصميم التطبيقات', desc: 'تصميم واجهات تطبيقات هواتف ذكية عصرية ومريحة للمستخدم.' },
+              { icon: '<i class="bi bi-laptop"></i>', title: 'تصميم مواقع الويب', desc: 'مواقع إلكترونية متجاوبة تعكس هوية علامتك التجارية باحترافية.' },
+              { icon: '<i class="bi bi-palette"></i>', title: 'الهوية البصرية', desc: 'بناء علامات تجارية متكاملة وشعارات ترسخ في أذهان عملائك.' }
+            ],
+            contactSub: 'جاهز لتحويل فكرتك إلى واقع؟ تواصل معي الآن.',
+            formName: 'الاسم الكريم',
+            formEmail: 'البريد الإلكتروني (اختياري)',
+            formMessage: 'تفاصيل المشروع',
+            sendBtn: 'إرسال عبر واتساب',
+            rights: 'جميع الحقوق محفوظة.'
+          },
+          en: {
+            logo: 'Hany.',
+            navHome: 'Home',
+            navAbout: 'About Me',
+            navServices: 'Services',
+            navContact: 'Contact',
+            heroName: "Hi, I'm Hany",
+            heroRole: 'A UI/UX Designer & Developer crafting exceptional digital experiences.',
+            heroBtn: 'Let\'s talk about your project',
+            aboutTitle: 'I design clean, simple & unique interfaces.',
+            aboutDesc: 'I am Hany, passionate about UI/UX design. I help businesses and individuals turn their ideas into engaging and user-friendly digital products.',
+            skills: ['UI/UX Design', 'Front-end Development', 'Brand Identity', 'Mobile App Design'],
+            servicesSub: 'Comprehensive creative solutions for your digital success',
+            servicesList: [
+              { icon: '<i class="bi bi-phone"></i>', title: 'App Design', desc: 'Modern and user-friendly mobile application interfaces.' },
+              { icon: '<i class="bi bi-laptop"></i>', title: 'Web Design', desc: 'Responsive websites that professionally reflect your brand.' },
+              { icon: '<i class="bi bi-palette"></i>', title: 'Brand Identity', desc: 'Building complete brands and memorable logos for your business.' }
+            ],
+            contactSub: 'Ready to turn your idea into reality? Contact me now.',
+            formName: 'Your Name',
+            formEmail: 'Email Address (Optional)',
+            formMessage: 'Project Details',
+            sendBtn: 'Send via WhatsApp',
+            rights: 'All rights reserved.'
+          }
+        },
+
+        init() {
+          this.applyLang();
+          this.$watch('lang', () => this.applyLang());
+        },
+
+        toggleLang() {
+          this.lang = this.lang === 'en' ? 'ar' : 'en';
+        },
+
+        applyLang() {
+          document.documentElement.dir = this.lang === 'ar' ? 'rtl' : 'ltr';
+          document.documentElement.lang = this.lang;
+        },
+
+        sendToWhatsApp() {
+          if (!this.form.name || !this.form.message) return;
+          
+          let text = this.lang === 'ar' 
+            ? `مرحباً هاني، 👋\n\n*الاسم:* ${this.form.name}\n${this.form.email ? `*البريد:* ${this.form.email}\n` : ''}\n*الرسالة:*\n${this.form.message}`
+            : `Hello Hany, 👋\n\n*Name:* ${this.form.name}\n${this.form.email ? `*Email:* ${this.form.email}\n` : ''}\n*Message:*\n${this.form.message}`;
+
+          window.open(`https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+      }));
+    });
+  </script>
+</body>
+</html>

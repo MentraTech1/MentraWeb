@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" x-data="projectsApp()" :dir="lang === 'ar' ? 'rtl' : 'ltr'" :lang="lang" :class="{'dark':dark}" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="معرض أعمال أحمد علي — تصميم وتطوير واجهات المستخدم.">
+  <title x-text="t('page_title')">Ahmed Ali — Projects</title>
+     <link rel="icon" type="image/png" sizes="32x32" href="https://mentra-tech.pages.dev/assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { 
+            display: ['Cairo', 'PT Sans', 'sans-serif'], 
+            body: ['Cairo', 'DM Sans', 'sans-serif'] 
+          },
+          colors: { accent: '#25D366', 'accent-light': '#128C7E' }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{font-family:'Cairo', 'DM Sans', sans-serif}
+    h1,h2,h3,h4,h5,h6{font-family:'Cairo', 'PT Sans', sans-serif}
+    body{transition:background-color .3s,color .3s}
+
+    html[dir="ltr"] body { font-family: 'DM Sans', sans-serif; }
+    html[dir="ltr"] h1, html[dir="ltr"] h2, html[dir="ltr"] h3, html[dir="ltr"] h4, html[dir="ltr"] h5, html[dir="ltr"] h6 { font-family: 'PT Sans', sans-serif; }
+
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:#25D366;border-radius:99px}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    
+    .nav-link{position:relative;}
+    .nav-link::after{content:'';position:absolute;bottom:-2px;inset-inline-start:0;width:0;height:1.5px;background:currentColor;transition:width .25s cubic-bezier(.4,0,.2,1);}
+    .nav-link:hover::after{width:100%;}
+    
+    .btn-primary{position:relative;overflow:hidden;}
+    .btn-primary::after{content:'';position:absolute;top:0;inset-inline-start:-100%;width:60%;height:100%;background:rgba(255,255,255,.18);transform:skewX(-20deg);transition:inset-inline-start .4s cubic-bezier(.4,0,.2,1);}
+    .btn-primary:hover::after{inset-inline-start:160%;}
+    
+    [x-cloak]{display:none!important;}
+    .photo-frame{position:relative;overflow:hidden;background:#e4e4e7;}
+    .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+    .project-card{transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .2s;}
+    .project-card:hover{transform:translateY(-4px);}
+  </style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+  <!-- ═══ NAV ═══ -->
+  <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white" x-text="t('logo_p1')"></span><span class="text-accent" x-text="t('logo_p2')"></span>
+      </a>
+
+      <!-- Desktop Links (pointing back to index.html sections) -->
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" x-text="t('nav_services')"></a></li>
+        <li><a href="#" class="nav-link text-accent font-medium border-b-2 border-accent pb-0.5" x-text="t('nav_work')"></a></li>
+        <li><a href="index.html#about" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" x-text="t('nav_about')"></a></li>
+        <li><a href="index.html#reviews" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" x-text="t('nav_reviews')"></a></li>
+        <li><a href="index.html#contact" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" x-text="t('nav_contact')"></a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <!-- Language toggle -->
+        <button @click="toggleLang()" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors font-bold text-xs" :aria-label="'Switch language'">
+          <span x-text="lang === 'ar' ? 'EN' : 'ع'"></span>
+        </button>
+
+        <!-- Dark mode toggle -->
+        <button @click="dark=!dark;localStorage.setItem('theme',dark?'dark':'light')" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+          <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </button>
+
+        <!-- Hire Me -->
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">
+          <span x-text="t('nav_hire')"></span>
+          <svg class="w-3.5 h-3.5" :class="lang === 'ar' ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800">
+          <svg x-show="!mobileMenu" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg x-show="mobileMenu" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" x-cloak x-transition.opacity class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300" x-text="t('nav_services')"></a></li>
+        <li><a href="#" @click="mobileMenu=false" class="block text-accent font-medium" x-text="t('nav_work')"></a></li>
+        <li><a href="index.html#about" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300" x-text="t('nav_about')"></a></li>
+        <li><a href="index.html#reviews" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300" x-text="t('nav_reviews')"></a></li>
+        <li><a href="index.html#contact" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300" x-text="t('nav_contact')"></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ HEADER SECTION ═══ -->
+    <section class="pt-36 pb-12 relative overflow-hidden">
+      <div class="absolute top-0 inset-inline-end-0 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <a href="index.html" class="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-accent transition-colors mb-6 group">
+          <svg class="w-4 h-4 transform transition-transform group-hover:-translate-x-1" :class="lang === 'en' ? '' : 'rotate-180 group-hover:translate-x-1 group-hover:-translate-x-0'" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <span x-text="t('back_home')"></span>
+        </a>
+
+        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3" x-text="t('work_sub')"></p>
+        <h1 class="reveal font-display font-bold text-5xl md:text-6xl text-zinc-900 dark:text-white leading-tight mb-4" x-text="t('projects_title')"></h1>
+        <p class="reveal text-lg text-zinc-500 dark:text-zinc-400 max-w-xl leading-relaxed mb-8" x-text="t('projects_desc')"></p>
+        
+        <!-- Filters -->
+        <div class="reveal flex flex-wrap gap-2">
+          <template x-for="f in filterOptions" :key="f.value">
+            <button
+              @click="filter = f.value"
+              :class="filter === f.value ? 'bg-accent text-white border-accent' : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:border-accent'"
+              class="text-sm px-4 py-1.5 rounded-full border transition-colors font-medium"
+              x-text="f.label[lang]">
+            </button>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS GRID ═══ -->
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <template x-for="p in allProjects" :key="p.id">
+            <div
+              x-show="filter === 'all' || p.category === filter"
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+              x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-200"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95">
+              
+              <article class="project-card group h-full rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-accent transition-colors flex flex-col">
+                <a :href="p.url" class="block photo-frame w-full h-52 shrink-0">
+                  <img :src="p.img" :alt="p.title[lang]" loading="lazy"/>
+                </a>
+                <div class="p-6 flex flex-col grow">
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-green-50 dark:bg-zinc-800 text-accent border border-green-200 dark:border-zinc-700" x-text="p.categoryLabel[lang]"></span>
+                  </div>
+                  <a :href="p.url">
+                    <h3 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors" x-text="p.title[lang]"></h3>
+                  </a>
+                  <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 grow" x-text="p.desc[lang]"></p>
+                  
+                  <div class="flex items-center justify-between pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                    <a :href="p.url" class="inline-flex items-center gap-1.5 text-sm font-bold text-zinc-900 dark:text-white nav-link">
+                      <span x-text="t('view_case')"></span>
+                      <svg class="w-3.5 h-3.5" :class="lang === 'ar' ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                    <span class="text-xs text-zinc-400 font-medium" dir="ltr" x-text="p.year"></span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </template>
+
+        </div>
+        
+        <!-- Empty State -->
+        <div x-show="visibleCount === 0" x-cloak class="text-center py-20 bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800">
+          <p class="text-zinc-500 dark:text-zinc-400 font-medium" x-text="t('no_projects')"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA SECTION ═══ -->
+    <section class="pb-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-14 text-center relative overflow-hidden shadow-2xl">
+          <div class="absolute top-0 inset-inline-end-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 inset-inline-start-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="relative z-10">
+            <p class="text-xs font-medium text-accent tracking-widest uppercase mb-4" x-text="t('cta_sub')"></p>
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-white mb-4" x-text="t('cta_title')"></h2>
+            <p class="text-zinc-400 max-w-md mx-auto mb-8" x-text="t('cta_desc')"></p>
+            <a href="index.html#contact" class="inline-flex items-center gap-2 btn-primary bg-accent text-white font-bold px-8 py-3.5 rounded-full hover:bg-accent-light transition-colors">
+              <span x-text="t('cta_btn')"></span>
+              <svg class="w-4 h-4" :class="lang === 'ar' ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">&copy; <span id="year"></span> <span x-text="t('footer_rights')"></span></p>
+      <p class="text-xs text-zinc-500" dir="ltr">Built with Tailwind CSS &amp; Alpine.js</p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      ar: {
+        page_title: 'أحمد علي — جميع الأعمال',
+        logo_p1: 'أحمد ',
+        logo_p2: 'علي',
+        nav_services: 'خدماتي',
+        nav_work: 'أعمالي',
+        nav_about: 'من أنا',
+        nav_reviews: 'الآراء',
+        nav_contact: 'تواصل معي',
+        nav_hire: 'تواصل معي الآن',
+        
+        back_home: 'العودة للرئيسية',
+        work_sub: 'معرض الأعمال',
+        projects_title: 'كل المشاريع',
+        projects_desc: 'نظرة شاملة على أعمالي في تصميم تجربة المستخدم (UI/UX) وتطوير الواجهات الأمامية.',
+        
+        view_case: 'عرض التفاصيل',
+        no_projects: 'لا توجد مشاريع في هذا القسم حالياً.',
+        
+        cta_sub: 'مستعد للبدء؟',
+        cta_title: 'هل تريد رؤية مشروعك هنا؟',
+        cta_desc: 'أنا متاح لمشاريع جديدة. أخبرني عن فكرتك لنتحدث حول إمكانية العمل معاً.',
+        cta_btn: 'ابدأ مشروعك الآن',
+        
+        footer_rights: 'أحمد علي. جميع الحقوق محفوظة.'
+      },
+      en: {
+        page_title: 'Ahmed Ali — All Projects',
+        logo_p1: 'Ahmed ',
+        logo_p2: 'Ali',
+        nav_services: 'Services',
+        nav_work: 'Work',
+        nav_about: 'About',
+        nav_reviews: 'Reviews',
+        nav_contact: 'Contact',
+        nav_hire: 'Contact me now',
+        
+        back_home: 'Back to Home',
+        work_sub: 'Portfolio',
+        projects_title: 'All Projects',
+        projects_desc: 'A complete look at my work across UI/UX design, frontend development and landing pages.',
+        
+        view_case: 'View case study',
+        no_projects: 'No projects in this category yet.',
+        
+        cta_sub: 'Ready to start?',
+        cta_title: 'Want your project here?',
+        cta_desc: 'I\'m available for new projects. Tell me about what you\'re building and let\'s see if we\'re a good fit.',
+        cta_btn: 'Start a project',
+        
+        footer_rights: 'Ahmed Ali. All rights reserved.'
+      }
+    };
+
+    function projectsApp() {
+      return {
+        lang: localStorage.getItem('lang') || 'ar',
+        dark: false,
+        scrolled: false,
+        mobileMenu: false,
+        filter: 'all',
+
+        filterOptions: [
+          { value: 'all',       label: { ar: 'الكل (9)', en: 'All (9)' } },
+          { value: 'saas',      label: { ar: 'تطبيقات SaaS', en: 'SaaS' } },
+          { value: 'landing',   label: { ar: 'صفحات هبوط', en: 'Landing Pages' } },
+          { value: 'agency',    label: { ar: 'مواقع شركات', en: 'Agency' } },
+          { value: 'ecommerce', label: { ar: 'متاجر إلكترونية', en: 'E-commerce' } },
+        ],
+
+        allProjects: [
+          { 
+            id:1, category:'saas', tags:['SaaS','Figma'], year:'2025', img:'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'تطبيق SaaS', en: 'SaaS' },
+            title: { ar: 'منصة إدارة إشعارات B2B', en: 'Novu — SaaS Dashboard' },
+            desc: { ar: 'إعادة تصميم كاملة للوحة تحكم B2B. قللت نسبة التشتت بـ 40% ورفعت نسبة تحويل المستخدمين للنسخة المدفوعة.', en: 'Complete redesign of a B2B notification platform. Reduced cognitive load by 40% and improved trial-to-paid conversion.' }
+          },
+          { 
+            id:2, category:'landing', tags:['Fintech','Alpine.js'], year:'2024', img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'صفحة هبوط', en: 'Landing page' },
+            title: { ar: 'تطبيق التكنولوجيا المالية Finlo', en: 'Finlo — Fintech App' },
+            desc: { ar: 'موقع تسويقي وتجربة مستخدم لتطبيق تمويل شخصي موجه للشباب والموظفين.', en: 'Marketing site and onboarding flow for a personal finance app targeting young professionals.' }
+          },
+          { 
+            id:3, category:'agency', tags:['Agency','Animation'], year:'2024', img:'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'موقع شركة', en: 'Agency' },
+            title: { ar: 'وكالة الإبداع Orea', en: 'Orea — Creative Agency' },
+            desc: { ar: 'موقع عصري وجريء لوكالة تصميم وبناء علامات تجارية، مع أنيميشن مخصص أثناء التمرير.', en: 'Bold editorial site for a branding studio. Scroll-driven animations and custom cursor.' }
+          },
+          { 
+            id:4, category:'landing', tags:['Real Estate'], year:'2024', img:'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'صفحة هبوط', en: 'Landing page' },
+            title: { ar: 'منصة Vesta للعقارات', en: 'Vesta — Real Estate' },
+            desc: { ar: 'صفحة هبوط مصممة لزيادة المبيعات لشركة ناشئة في مجال التكنولوجيا العقارية في السوق المصري.', en: 'Conversion-focused landing page for a proptech startup entering the market.' }
+          },
+          { 
+            id:5, category:'saas', tags:['Dashboard'], year:'2024', img:'https://images.unsplash.com/photo-1581472723648-909f4851d4ae?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'تطبيق SaaS', en: 'SaaS' },
+            title: { ar: 'لوحة تحكم Arkio للبيانات', en: 'Arkio — SaaS Analytics' },
+            desc: { ar: 'لوحة تحكم تفاعلية لعرض البيانات المعقدة بشكل مبسط ومريح للعين.', en: 'Data visualisation dashboard for a B2B analytics platform. Designed for clarity at high data density.' }
+          },
+          { 
+            id:6, category:'ecommerce', tags:['E-commerce'], year:'2023', img:'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'متجر إلكتروني', en: 'E-commerce' },
+            title: { ar: 'متجر Bloom لمستحضرات التجميل', en: 'Bloom — E-commerce' },
+            desc: { ar: 'تصميم وبناء متجر إلكتروني متجاوب كلياً للعلامة التجارية بتركيز عالي على عرض المنتجات.', en: 'Custom E-commerce theme for a sustainable cosmetics brand. Mobile-first with high emphasis on product imagery.' }
+          },
+          { 
+            id:7, category:'landing', tags:['Health'], year:'2023', img:'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'صفحة هبوط', en: 'Landing page' },
+            title: { ar: 'تطبيق Mira للصحة النفسية', en: 'Mira — Health App' },
+            desc: { ar: 'موقع تعريفي لتطبيق صحة نفسية بتصميم دافئ ومريح يعزز الثقة.', en: 'App landing page for a mental wellness startup. Warm, accessible design with strong social proof.' }
+          },
+          { 
+            id:8, category:'agency', tags:['Rebrand'], year:'2023', img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'موقع شركة', en: 'Agency' },
+            title: { ar: 'إعادة بناء هوية وكالة Noto', en: 'Noto — Agency Rebrand' },
+            desc: { ar: 'إعادة تصميم الهوية البصرية والموقع الإلكتروني بالكامل لوكالة تسويق رقمي.', en: 'Full rebrand and website for a digital communications agency.' }
+          },
+          { 
+            id:9, category:'ecommerce', tags:['Figma'], year:'2023', img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80', url:'#',
+            categoryLabel: { ar: 'متجر إلكتروني', en: 'E-commerce' },
+            title: { ar: 'متجر Kova للأثاث', en: 'Kova — E-commerce' },
+            desc: { ar: 'إعادة تصميم صفحة المنتج وعملية الدفع لمتجر أثاث مما قلل نسبة التخلي عن السلة بـ 18%.', en: 'Product page redesign and checkout optimisation for a furniture brand. Reduced cart abandonment by 18%.' }
+          }
+        ],
+
+        get visibleCount() {
+          if (this.filter === 'all') return this.allProjects.length;
+          return this.allProjects.filter(p => p.category === this.filter).length;
+        },
+
+        init() {
+          this.dark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          this.$watch('dark', v => localStorage.setItem('theme', v ? 'dark' : 'light'));
+
+          window.addEventListener('scroll', () => {
+            this.scrolled = window.scrollY > 20;
+          }, { passive: true });
+
+          this.$nextTick(() => {
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => {
+                if (e.isIntersecting) {
+                  e.target.classList.add('visible');
+                  obs.unobserve(e.target);
+                }
+              });
+            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+          });
+          
+          document.getElementById('year').textContent = new Date().getFullYear();
+        },
+
+        t(key) {
+          return translations[this.lang][key] || key;
+        },
+
+        toggleLang() {
+          this.lang = this.lang === 'ar' ? 'en' : 'ar';
+          localStorage.setItem('lang', this.lang);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
