@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <title class="tr" data-en="Dr. Ahmed | Cardiologist" data-ar="د. أحمد | استشاري أمراض القلب">Dr. Ahmed | Cardiologist</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+     <link rel="icon" type="image/png" sizes="32x32" href="https://mentra-tech.pages.dev/assets/logo.png">
+
+  <!-- Boxicons (Icons) -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0369a1', /* Medical Blue */
+            secondary: '#0ea5e9', /* Light Blue */
+            accent: '#38bdf8',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Alpine.js via CDN -->
+  <script defer src="https://unpkg.com/@alpine-collective/toolkit@1.0.0/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Custom Styles for RTL, Fonts, and Floating Buttons -->
+  <style>
+    html[dir="ltr"] { font-family: 'Poppins', sans-serif; }
+    html[dir="rtl"] { font-family: 'Cairo', sans-serif; }
+    
+    /* Smooth Transitions */
+    body, div, p, span, h1, h2, h3, h4, h5, h6, a, button, input, textarea {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* RTL specific fixes for Tailwind */
+    html[dir="rtl"] .ml-auto { margin-left: 0; margin-right: auto; }
+    html[dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+    html[dir="rtl"] .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+    html[dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
+    html[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+    html[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+    html[dir="rtl"] .text-left { text-align: right; }
+    html[dir="rtl"] .lg\:pl-8 { padding-left: 0; padding-right: 2rem; }
+    html[dir="rtl"] .border-l-2 { border-left-width: 0; border-right-width: 2px; }
+
+    /* Floating Settings Buttons */
+    .floating-settings {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .floating-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #0369a1; /* Primary Medical Blue */
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s;
+    }
+    .floating-btn:hover {
+        transform: scale(1.1);
+        background: #0ea5e9;
+    }
+    
+    @media(max-width: 768px) {
+        .floating-settings { bottom: 15px; left: 15px; }
+        .floating-btn { width: 45px; height: 45px; font-size: 15px; }
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200" :class="{ 'overflow-hidden max-h-screen': mobileMenu }" x-data="{ mobileMenu: false }">
+    
+  <!-- Floating Buttons -->
+  <div class="floating-settings">
+      <button id="langToggle" class="floating-btn shadow-lg" title="تغيير اللغة / Change Language">AR</button>
+      <button id="themeToggle" class="floating-btn shadow-lg" title="الوضع الليلي / Dark Mode"><i id="themeIcon" class="bx bx-moon text-2xl"></i></button>
+  </div>
+
+  <div id="main" class="relative">
+    <div x-data="{ triggerNavItem(id) { document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); }, triggerMobileNavItem(id) { mobileMenu = false; this.triggerNavItem(id) } }">
+      
+      <!-- Navbar -->
+      <div class="w-full z-50 top-0 py-3 sm:py-5 absolute">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+          <div>
+            <a href="/" class="text-3xl font-bold text-white tracking-wide">
+              <i class='bx bx-plus-medical'></i> Dr. <span class="text-secondary">Ahmed</span>
+            </a>
+          </div>
+          <div class="hidden lg:block">
+            <ul class="flex items-center">
+              <li class="group pl-6"><span @click="triggerNavItem('#about')" class="cursor-pointer font-semibold uppercase text-white hover:text-secondary tr" data-en="About" data-ar="من أنا">About</span></li>
+              <li class="group pl-6"><span @click="triggerNavItem('#services')" class="cursor-pointer font-semibold uppercase text-white hover:text-secondary tr" data-en="Services" data-ar="خدماتي">Services</span></li>
+              <li class="group pl-6"><span @click="triggerNavItem('#experience')" class="cursor-pointer font-semibold uppercase text-white hover:text-secondary tr" data-en="Experience" data-ar="الخبرات">Experience</span></li>
+              <li class="group pl-6"><span @click="triggerNavItem('#facilities')" class="cursor-pointer font-semibold uppercase text-white hover:text-secondary tr" data-en="Facilities" data-ar="العيادات">Facilities</span></li>
+              <li class="group pl-6"><span @click="triggerNavItem('#contact')" class="cursor-pointer font-semibold uppercase text-white hover:text-secondary tr" data-en="Contact" data-ar="احجز موعداً">Contact</span></li>
+            </ul>
+          </div>
+          <div class="block lg:hidden">
+            <button @click="mobileMenu = true"><i class="bx bx-menu text-4xl text-white"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="fixed inset-0 z-[100] min-h-screen bg-black bg-opacity-70 opacity-0 transition-opacity lg:hidden pointer-events-none" :class="{ 'opacity-100 pointer-events-auto': mobileMenu }">
+        <div class="absolute right-0 min-h-screen w-2/3 bg-primary dark:bg-gray-800 py-4 px-8 shadow md:w-1/3">
+          <button class="absolute top-0 right-0 mt-4 mr-4" @click="mobileMenu = false"><i class="bx bx-x text-4xl text-white"></i></button>
+          <ul class="mt-12 flex flex-col">
+            <li class="py-3 border-b border-blue-400 dark:border-gray-600"><span @click="triggerMobileNavItem('#about')" class="cursor-pointer font-semibold uppercase text-white tr" data-en="About" data-ar="من أنا">About</span></li>
+            <li class="py-3 border-b border-blue-400 dark:border-gray-600"><span @click="triggerMobileNavItem('#services')" class="cursor-pointer font-semibold uppercase text-white tr" data-en="Services" data-ar="خدماتي">Services</span></li>
+            <li class="py-3 border-b border-blue-400 dark:border-gray-600"><span @click="triggerMobileNavItem('#experience')" class="cursor-pointer font-semibold uppercase text-white tr" data-en="Experience" data-ar="الخبرات">Experience</span></li>
+            <li class="py-3 border-b border-blue-400 dark:border-gray-600"><span @click="triggerMobileNavItem('#facilities')" class="cursor-pointer font-semibold uppercase text-white tr" data-en="Facilities" data-ar="العيادات">Facilities</span></li>
+            <li class="py-3"><span @click="triggerMobileNavItem('#contact')" class="cursor-pointer font-semibold uppercase text-white tr" data-en="Contact" data-ar="احجز موعداً">Contact</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <div class="relative bg-cover bg-center bg-no-repeat py-8" style="background-image: url('https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2000&auto=format&fit=crop');">
+        <div class="absolute inset-0 z-20 bg-blue-900 bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-90"></div>
+        <div class="container mx-auto px-4 relative z-30 pt-32 pb-12 sm:pt-48 sm:pb-32 lg:pt-64 lg:pb-48">
+          <div class="flex flex-col items-center justify-center lg:flex-row">
+            <div class="rounded-full border-4 border-secondary shadow-2xl overflow-hidden h-48 w-48 sm:h-56 sm:w-56 bg-white">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=500&auto=format&fit=crop" class="w-full h-full object-cover" alt="Doctor image" />
+            </div>
+            <div class="pt-8 sm:pt-10 lg:pl-8 lg:pt-0 text-center lg:text-left">
+              <h1 class="font-bold text-4xl text-white sm:text-5xl md:text-6xl tr" data-en="Dr. Ahmed Hassan" data-ar="د. أحمد حسن">Dr. Ahmed Hassan</h1>
+              <h2 class="text-secondary text-xl sm:text-2xl mt-2 font-medium tr" data-en="Senior Consultant Cardiologist" data-ar="استشاري أول أمراض القلب والأوعية الدموية">Senior Consultant Cardiologist</h2>
+              <div class="flex flex-col justify-center pt-5 sm:flex-row lg:justify-start items-center">
+                <a href="#contact" class="bg-secondary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary transition shadow-lg tr" data-en="Book an Appointment" data-ar="احجز موعدك الآن">Book an Appointment</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="bg-gray-50 dark:bg-gray-800" id="about">
+        <div class="container mx-auto px-4 flex flex-col items-center py-16 lg:flex-row">
+          <div class="w-full text-center lg:w-3/5 lg:text-left">
+            <h2 class="text-3xl font-bold uppercase text-primary dark:text-secondary sm:text-4xl tr" data-en="About Dr. Ahmed" data-ar="نبذة عن الطبيب">About Dr. Ahmed</h2>
+            <p class="pt-6 leading-relaxed text-gray-600 dark:text-gray-300 text-lg tr" data-en="With over 15 years of dedicated experience in cardiology, Dr. Ahmed specializes in diagnosing and treating complex heart conditions. Committed to patient-centered care, he utilizes the latest medical technologies to ensure the best possible outcomes." data-ar="بخبرة تزيد عن 15 عاماً في طب القلب، يتخصص د. أحمد في تشخيص وعلاج أمراض القلب المعقدة. يلتزم بتقديم رعاية طبية تتمحور حول المريض، مستخدماً أحدث التقنيات الطبية لضمان أفضل النتائج لمرضاه.">With over 15 years of dedicated experience in cardiology, Dr. Ahmed specializes in diagnosing and treating complex heart conditions. Committed to patient-centered care, he utilizes the latest medical technologies to ensure the best possible outcomes.</p>
+            <div class="flex items-center justify-center pt-6 lg:justify-start gap-4">
+              <a href="#" class="bg-blue-100 text-primary dark:bg-gray-700 dark:text-secondary p-3 rounded-full hover:bg-primary hover:text-white transition"><i class="bx bxl-facebook text-2xl"></i></a>
+              <a href="#" class="bg-blue-100 text-primary dark:bg-gray-700 dark:text-secondary p-3 rounded-full hover:bg-primary hover:text-white transition"><i class="bx bxl-linkedin text-2xl"></i></a>
+              <a href="#" class="bg-blue-100 text-primary dark:bg-gray-700 dark:text-secondary p-3 rounded-full hover:bg-primary hover:text-white transition"><i class="bx bxl-twitter text-2xl"></i></a>
+            </div>
+          </div>
+          <div class="w-full pl-0 pt-10 sm:w-3/4 lg:w-2/5 lg:pl-12 lg:pt-0">
+            <div>
+              <div class="flex items-end justify-between"><h4 class="font-semibold uppercase text-gray-800 dark:text-white tr" data-en="Open Heart Surgery" data-ar="جراحات القلب المفتوح">Open Heart Surgery</h4><h3 class="text-xl font-bold text-primary dark:text-secondary">95%</h3></div>
+              <div class="mt-2 h-3 w-full rounded-full bg-gray-300 dark:bg-gray-600"><div class="h-3 rounded-full bg-primary dark:bg-secondary" style="width: 95%"></div></div>
+            </div>
+            <div class="pt-6">
+              <div class="flex items-end justify-between"><h4 class="font-semibold uppercase text-gray-800 dark:text-white tr" data-en="Echocardiography" data-ar="تخطيط صدى القلب">Echocardiography</h4><h3 class="text-xl font-bold text-primary dark:text-secondary">98%</h3></div>
+              <div class="mt-2 h-3 w-full rounded-full bg-gray-300 dark:bg-gray-600"><div class="h-3 rounded-full bg-primary dark:bg-secondary" style="width: 98%"></div></div>
+            </div>
+            <div class="pt-6">
+              <div class="flex items-end justify-between"><h4 class="font-semibold uppercase text-gray-800 dark:text-white tr" data-en="Cardiac Catheterization" data-ar="القسطرة القلبية">Cardiac Catheterization</h4><h3 class="text-xl font-bold text-primary dark:text-secondary">90%</h3></div>
+              <div class="mt-2 h-3 w-full rounded-full bg-gray-300 dark:bg-gray-600"><div class="h-3 rounded-full bg-primary dark:bg-secondary" style="width: 90%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <div class="container mx-auto px-4 py-16" id="services">
+        <h2 class="text-center text-3xl font-bold uppercase text-primary dark:text-secondary sm:text-4xl tr" data-en="Medical Services" data-ar="الخدمات الطبية">Medical Services</h2>
+        <p class="pt-4 text-center text-lg text-gray-600 dark:text-gray-400 tr" data-en="Comprehensive cardiovascular care tailored to your needs." data-ar="رعاية شاملة لأمراض القلب والأوعية الدموية مصممة خصيصاً لتلبية احتياجاتك.">Comprehensive cardiovascular care tailored to your needs.</p>
+
+        <div class="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 lg:grid-cols-3">
+          <!-- Service 1 -->
+          <div class="group rounded-lg px-8 py-10 shadow-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-primary dark:hover:bg-primary transition duration-300 text-center">
+            <i class='bx bx-pulse text-5xl text-secondary group-hover:text-white'></i>
+            <h3 class="pt-6 text-xl font-bold uppercase text-gray-800 dark:text-white group-hover:text-white tr" data-en="ECG & Diagnostics" data-ar="تخطيط القلب والتشخيص">ECG & Diagnostics</h3>
+            <p class="pt-4 text-gray-600 dark:text-gray-400 group-hover:text-gray-100 tr" data-en="Advanced monitoring and diagnostics for accurate detection of heart conditions." data-ar="مراقبة وتشخيص متقدم للكشف الدقيق عن أمراض القلب.">Advanced monitoring and diagnostics for accurate detection of heart conditions.</p>
+          </div>
+          <!-- Service 2 -->
+          <div class="group rounded-lg px-8 py-10 shadow-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-primary dark:hover:bg-primary transition duration-300 text-center">
+            <i class='bx bx-heart text-5xl text-secondary group-hover:text-white'></i>
+            <h3 class="pt-6 text-xl font-bold uppercase text-gray-800 dark:text-white group-hover:text-white tr" data-en="Heart Surgery" data-ar="جراحات القلب">Heart Surgery</h3>
+            <p class="pt-4 text-gray-600 dark:text-gray-400 group-hover:text-gray-100 tr" data-en="Expert surgical interventions including bypass and valve replacements." data-ar="تدخلات جراحية دقيقة تشمل زراعة الدعامات وتغيير الصمامات.">Expert surgical interventions including bypass and valve replacements.</p>
+          </div>
+          <!-- Service 3 -->
+          <div class="group rounded-lg px-8 py-10 shadow-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-primary dark:hover:bg-primary transition duration-300 text-center">
+            <i class='bx bx-plus-medical text-5xl text-secondary group-hover:text-white'></i>
+            <h3 class="pt-6 text-xl font-bold uppercase text-gray-800 dark:text-white group-hover:text-white tr" data-en="General Consultations" data-ar="استشارات طبية عامة">General Consultations</h3>
+            <p class="pt-4 text-gray-600 dark:text-gray-400 group-hover:text-gray-100 tr" data-en="Routine check-ups, lifestyle advice, and medication management." data-ar="فحوصات دورية، نصائح حول نمط الحياة، وإدارة الأدوية بدقة.">Routine check-ups, lifestyle advice, and medication management.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facilities (Portfolio Replacement) -->
+      <div class="bg-gray-50 dark:bg-gray-800 py-16" id="facilities">
+        <div class="container mx-auto px-4">
+          <h2 class="text-center text-3xl font-bold uppercase text-primary dark:text-secondary sm:text-4xl tr" data-en="Our Clinics & Facilities" data-ar="عياداتنا والمرافق الطبية">Our Clinics & Facilities</h2>
+          <div class="mx-auto grid w-full grid-cols-1 gap-8 pt-12 lg:grid-cols-2">
+            <div class="rounded-xl overflow-hidden shadow-lg transform transition hover:scale-105">
+              <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover" alt="Hospital Room" />
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-lg transform transition hover:scale-105">
+              <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover" alt="Medical Equipment" />
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-lg transform transition hover:scale-105">
+              <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1000&auto=format&fit=crop" class="w-full h-64 object-cover" alt="Surgery Room" />
+            </div>
+            <div class="rounded-xl overflow-hidden shadow-lg transform transition hover:scale-105">
+              <img src="https://artedivinoeg.com/wp-content/uploads/2025/07/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D8%AA%D8%B5%D9%85%D9%8A%D9%85-%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA-%D8%B7%D8%A8%D9%8A%D8%A9.png" class="w-full h-64 object-cover" alt="Patient Care" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Section -->
+      <div class="container mx-auto px-4 py-16" id="experience">
+        <h2 class="text-center text-3xl font-bold uppercase text-primary dark:text-secondary sm:text-4xl tr" data-en="Medical Experience" data-ar="الخبرات الطبية">Medical Experience</h2>
+        
+        <div class="relative mx-auto mt-12 flex w-full flex-col lg:w-2/3">
+          <span class="absolute inset-y-0 left-1/2 -ml-px hidden w-0.5 bg-gray-300 dark:bg-gray-700 md:block"></span>
+          
+          <!-- Job 1 -->
+          <div class="mt-8 flex flex-col text-center md:flex-row md:text-left items-center">
+            <div class="md:w-1/2 md:pr-12 text-right">
+              <span class="block font-bold text-gray-500 dark:text-gray-400 tr" data-en="2018 - Present" data-ar="2018 - حتى الآن">2018 - Present</span>
+              <span class="block pt-2 text-xl font-bold uppercase text-primary dark:text-secondary tr" data-en="Head of Cardiology" data-ar="رئيس قسم أمراض القلب">Head of Cardiology</span>
+              <span class="block font-medium text-gray-800 dark:text-white tr" data-en="International City Hospital" data-ar="مستشفى المدينة الدولي">International City Hospital</span>
+            </div>
+            <div class="hidden md:block w-4 h-4 rounded-full bg-secondary border-4 border-white dark:border-gray-900 absolute left-1/2 transform -translate-x-1/2"></div>
+            <div class="md:w-1/2 md:pl-12 text-left mt-4 md:mt-0">
+              <p class="text-gray-600 dark:text-gray-400 tr" data-en="Leading a team of 20 specialists, overseeing over 500 successful surgeries annually." data-ar="قيادة فريق مكون من 20 طبيباً أخصائياً، والإشراف على أكثر من 500 عملية جراحية ناجحة سنوياً.">Leading a team of 20 specialists, overseeing over 500 successful surgeries annually.</p>
+            </div>
+          </div>
+
+          <!-- Job 2 -->
+          <div class="mt-12 flex flex-col text-center md:flex-row md:text-left items-center">
+            <div class="md:w-1/2 md:pr-12 text-right">
+              <p class="text-gray-600 dark:text-gray-400 tr" data-en="Diagnosed and treated thousands of patients, introduced new minimally invasive techniques." data-ar="تشخيص وعلاج آلاف المرضى، وإدخال تقنيات جراحية حديثة بأقل تدخل جراحي ممكن.">Diagnosed and treated thousands of patients, introduced new minimally invasive techniques.</p>
+            </div>
+            <div class="hidden md:block w-4 h-4 rounded-full bg-secondary border-4 border-white dark:border-gray-900 absolute left-1/2 transform -translate-x-1/2"></div>
+            <div class="md:w-1/2 md:pl-12 text-left mt-4 md:mt-0">
+              <span class="block font-bold text-gray-500 dark:text-gray-400 tr" data-en="2010 - 2018" data-ar="2010 - 2018">2010 - 2018</span>
+              <span class="block pt-2 text-xl font-bold uppercase text-primary dark:text-secondary tr" data-en="Senior Surgeon" data-ar="جراح قلب أول">Senior Surgeon</span>
+              <span class="block font-medium text-gray-800 dark:text-white tr" data-en="National Heart Institute" data-ar="المعهد القومي للقلب">National Heart Institute</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="bg-primary dark:bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+          <div class="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
+            <div>
+              <i class='bx bx-group text-5xl text-white opacity-80'></i>
+              <h1 class="text-4xl font-bold text-white mt-4">10k+</h1>
+              <h4 class="text-white opacity-80 mt-2 tr" data-en="Patients Treated" data-ar="مرضى تم علاجهم">Patients Treated</h4>
+            </div>
+            <div>
+              <i class='bx bx-check-shield text-5xl text-white opacity-80'></i>
+              <h1 class="text-4xl font-bold text-white mt-4">1.5k+</h1>
+              <h4 class="text-white opacity-80 mt-2 tr" data-en="Successful Surgeries" data-ar="عمليات ناجحة">Successful Surgeries</h4>
+            </div>
+            <div>
+              <i class='bx bx-time text-5xl text-white opacity-80'></i>
+              <h1 class="text-4xl font-bold text-white mt-4">15+</h1>
+              <h4 class="text-white opacity-80 mt-2 tr" data-en="Years Experience" data-ar="سنوات من الخبرة">Years Experience</h4>
+            </div>
+            <div>
+              <i class='bx bx-award text-5xl text-white opacity-80'></i>
+              <h1 class="text-4xl font-bold text-white mt-4">12</h1>
+              <h4 class="text-white opacity-80 mt-2 tr" data-en="Medical Awards" data-ar="جوائز طبية">Medical Awards</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact / Appointment Form -->
+      <div class="container mx-auto px-4 py-16" id="contact">
+        <h2 class="text-center text-3xl font-bold uppercase text-primary dark:text-secondary sm:text-4xl tr" data-en="Book an Appointment" data-ar="احجز موعداً للزيارة">Book an Appointment</h2>
+        <p class="pt-4 text-center text-lg text-gray-600 dark:text-gray-400 tr" data-en="Fill the form below and our team will contact you via WhatsApp to confirm your slot." data-ar="املأ النموذج أدناه وسيقوم فريقنا بالتواصل معك عبر واتساب لتأكيد موعدك.">Fill the form below and our team will contact you via WhatsApp to confirm your slot.</p>
+        
+        <form id="whatsappForm" class="mx-auto w-full pt-10 sm:w-3/4 lg:w-1/2 bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700" onsubmit="sendToWhatsApp(event)">
+          <div class="mb-6">
+            <input class="w-full rounded bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-3 text-gray-800 dark:text-white focus:outline-none focus:border-secondary tr-ph" type="text" id="wa_name" data-en-ph="Full Name" data-ar-ph="الاسم بالكامل" placeholder="Full Name" required />
+          </div>
+          <div class="mb-6 flex flex-col md:flex-row gap-6">
+            <input class="w-full md:w-1/2 rounded bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-3 text-gray-800 dark:text-white focus:outline-none focus:border-secondary tr-ph" type="text" id="wa_phone" data-en-ph="Phone Number" data-ar-ph="رقم الهاتف" placeholder="Phone Number" required />
+            <input class="w-full md:w-1/2 rounded bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-3 text-gray-800 dark:text-white focus:outline-none focus:border-secondary tr-ph" type="text" id="wa_date" data-en-ph="Preferred Date (e.g. Tomorrow)" data-ar-ph="الموعد المفضل (مثال: غداً)" placeholder="Preferred Date" required />
+          </div>
+          <div class="mb-6">
+            <textarea class="w-full rounded bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-4 py-3 text-gray-800 dark:text-white focus:outline-none focus:border-secondary tr-ph" id="wa_message" cols="30" rows="5" data-en-ph="Briefly describe your symptoms or reason for visit" data-ar-ph="اشرح باختصار الأعراض أو سبب الزيارة" placeholder="Briefly describe your symptoms or reason for visit" required></textarea>
+          </div>
+          <button type="submit" class="w-full flex items-center justify-center rounded bg-primary dark:bg-secondary px-8 py-4 font-bold uppercase text-white hover:bg-blue-800 dark:hover:bg-blue-600 transition shadow-md tr" data-en="Confirm via WhatsApp" data-ar="تأكيد الحجز عبر واتساب">
+            <i class="bx bxl-whatsapp text-2xl mr-2 ml-2"></i> Confirm via WhatsApp
+          </button>
+        </form>
+
+        <div class="flex flex-col pt-16 lg:flex-row gap-6 justify-center">
+          <div class="w-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center lg:w-1/3 border border-gray-200 dark:border-gray-700">
+            <i class="bx bx-phone text-4xl text-secondary"></i>
+            <p class="pt-4 font-bold text-gray-800 dark:text-white tr" data-en="Emergency Contact" data-ar="طوارئ / اتصل بنا">Emergency Contact</p>
+            <p class="pt-2 text-primary dark:text-secondary font-bold" dir="ltr">+971 50 123 4567</p>
+          </div>
+          <div class="w-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center lg:w-1/3 border border-gray-200 dark:border-gray-700">
+            <i class="bx bx-map text-4xl text-secondary"></i>
+            <p class="pt-4 font-bold text-gray-800 dark:text-white tr" data-en="Clinic Location" data-ar="عنوان العيادة">Clinic Location</p>
+            <p class="pt-2 text-gray-600 dark:text-gray-400 tr" data-en="Medical City, Building A, Dubai" data-ar="المدينة الطبية، مبنى أ، دبي">Medical City, Building A, Dubai</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="bg-gray-900 text-white border-t border-gray-800">
+        <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between">
+          <p class="text-sm opacity-75 tr" data-en="© 2024 Dr. Ahmed. All rights reserved. Designed for Healthcare." data-ar="© 2024 د. أحمد. جميع الحقوق محفوظة. صُمم للرعاية الصحية.">© 2024 Dr. Ahmed. All rights reserved.</p>
+          <div class="flex gap-4 mt-4 md:mt-0">
+            <a href="#" class="hover:text-secondary transition"><i class="bx bxl-facebook text-2xl"></i></a>
+            <a href="#" class="hover:text-secondary transition"><i class="bx bxl-instagram text-2xl"></i></a>
+            <a href="#" class="hover:text-secondary transition"><i class="bx bxl-twitter text-2xl"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript for Language, Theme, and WhatsApp Logic -->
+  <script>
+    // --- Language and Theme Initialization ---
+    const langToggleBtn = document.getElementById('langToggle');
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlTag = document.documentElement;
+
+    let currentLang = localStorage.getItem('doctorLang') || 'en';
+    let currentTheme = localStorage.getItem('doctorTheme') || 'light';
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('doctorLang', lang);
+        
+        // Update HTML attributes
+        htmlTag.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        htmlTag.setAttribute('lang', lang);
+        
+        // Update Button Text
+        langToggleBtn.innerText = lang === 'ar' ? 'EN' : 'عربي';
+
+        // Translate inner text
+        document.querySelectorAll('.tr').forEach(el => {
+            el.innerHTML = el.getAttribute(`data-${lang}`);
+        });
+
+        // Translate Placeholders
+        document.querySelectorAll('.tr-ph').forEach(el => {
+            el.setAttribute('placeholder', el.getAttribute(`data-${lang}-ph`));
+        });
+    }
+
+    function applyTheme(theme) {
+        currentTheme = theme;
+        localStorage.setItem('doctorTheme', theme);
+
+        if(theme === 'dark') {
+            htmlTag.classList.add('dark');
+            themeIcon.className = 'bx bx-sun text-2xl'; 
+        } else {
+            htmlTag.classList.remove('dark');
+            themeIcon.className = 'bx bx-moon text-2xl'; 
+        }
+    }
+
+    // Event Listeners
+    langToggleBtn.addEventListener('click', () => { applyLanguage(currentLang === 'en' ? 'ar' : 'en'); });
+    themeToggleBtn.addEventListener('click', () => { applyTheme(currentTheme === 'light' ? 'dark' : 'light'); });
+
+    // Apply on page load
+    applyLanguage(currentLang);
+    applyTheme(currentTheme);
+
+    // --- WhatsApp Booking Logic ---
+    function sendToWhatsApp(event) {
+        event.preventDefault(); 
+
+        var name = document.getElementById('wa_name').value;
+        var phone = document.getElementById('wa_phone').value;
+        var date = document.getElementById('wa_date').value;
+        var message = document.getElementById('wa_message').value;
+
+        // **********************************************
+        // ضع رقم هاتفك هنا مع مفتاح الدولة وبدون +
+        // مثال: 201000000000 أو 971500000000
+        // **********************************************
+        var phoneNumber = "201211934816"; 
+
+        var whatsappMessage = "";
+        if (currentLang === 'ar') {
+            whatsappMessage = "مرحباً دكتور، أود حجز موعد جديد:%0a%0a" +
+                              "*اسم المريض:* " + name + "%0a" +
+                              "*رقم التواصل:* " + phone + "%0a" +
+                              "*الموعد المفضل:* " + date + "%0a" +
+                              "*الأعراض / السبب:* " + message;
+        } else {
+            whatsappMessage = "Hello Doctor, I would like to book an appointment:%0a%0a" +
+                              "*Patient Name:* " + name + "%0a" +
+                              "*Contact Number:* " + phone + "%0a" +
+                              "*Preferred Date:* " + date + "%0a" +
+                              "*Symptoms / Reason:* " + message;
+        }
+
+        var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + whatsappMessage;
+        window.open(whatsappURL, '_blank');
+    }
+  </script>
+
+</body>
+</html>

@@ -11,6 +11,9 @@
     <!-- استدعاء Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- استدعاء Alpine.js للميزات التفاعلية (مثل الـ QR) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- استدعاء خط Cairo العربي -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -53,17 +56,46 @@
             -webkit-text-fill-color: transparent;
             background-image: linear-gradient(to left, #ca8a04, #eab308);
         }
+
+        /* زر الواتساب العائم */
+        .float-wa {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .float-wa:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
     </style>
 </head>
-<body class="antialiased text-gray-800">
+<body class="antialiased text-gray-800 relative">
+
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/201115003099?text=أهلاً، أريد الاستفسار عن تصميم موقع شخصي خاص بي." target="_blank" class="float-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <!-- شريط التنقل -->
     <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             
             <div class="flex items-center gap-2 sm:gap-4 flex-1">
-                <a href="index" class="flex items-center logo-hover flex-shrink-0">
-                    <img src="me1/logo.png" alt="Mentra Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain drop-shadow-md">
+                <a href="index.html" class="flex items-center logo-hover flex-shrink-0">
+                    <img src="me1/logo.png" alt="Mentra Logo" class="w-10 h-10 md:w-12 md:h-12 object-contain drop-shadow-md" onerror="this.src='https://mentra-tech.pages.dev/assets/logo.png'">
                 </a>
                 
                 <div class="h-6 md:h-8 w-px bg-gray-300 rounded-full hidden sm:block"></div>
@@ -77,45 +109,47 @@
             </div>
 
             <!-- زر تواصل سريع -->
-            <a href="https://mentra-tech.pages.dev/" class="flex items-center gap-1 md:gap-2 text-gray-600 hover:text-green-600 font-bold transition bg-gray-100 hover:bg-gray-200 px-2 py-1.5 md:px-4 md:py-2 rounded-lg text-[10px] sm:text-xs md:text-base shadow-sm flex-shrink-0 ml-1">
-                <i class="fa-solid fa-arrow-right"></i> <span class="hidden sm:inline">العودة</span>
+            <a href="https://mentra-tech.pages.dev/" class="flex items-center gap-1 md:gap-2 text-gray-600 hover:text-green-600 font-bold transition bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg text-xs md:text-base shadow-sm flex-shrink-0 ml-1">
+                <i class="fa-solid fa-arrow-right"></i> <span class="hidden sm:inline">الرئيسية</span>
             </a>
         </div>
     </nav>
 
-    <!-- القسم العلوي (الهيرو) - رسالة تسويقية قوية -->
+    <!-- القسم العلوي (الهيرو) -->
     <section class="max-w-7xl mx-auto px-4 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 w-full overflow-hidden">
         
         <!-- النصوص التسويقية -->
         <div class="order-2 lg:order-1 w-full" data-aos="fade-up" data-aos-duration="1000">
             <span class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 font-bold px-4 py-1.5 rounded-full text-xs md:text-sm mb-5 shadow-sm border border-yellow-200">
-                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></span> استثمار ذكي بتكلفة منخفضة
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></span> استثمار ذكي لمستقبلك المهني
             </span>
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-5 leading-tight">
-                امتلك موقعك الشخصي، <br> <span class="text-gradient">واصنع علامتك الرقمية.</span>
+                امتلك موقعك الشخصي، <br> <span class="text-gradient">واصنع هويتك الرقمية.</span>
             </h1>
             <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed font-medium">
-                في عالم اليوم، تواجدك على الإنترنت لم يعد رفاهية. صممنا باقة <strong>"المواقع الشخصية"</strong> خصيصاً للمستقلين، المهندسين، والمدربين لتقديم أنفسهم باحترافية. <br/>
-                <span class="text-gray-900 font-bold bg-yellow-100 px-1 mt-2 inline-block">الأهم من ذلك؟ تكلفة اقتصادية جداً تناسب ميزانيتك.</span>
+                في عالم اليوم، تواجدك على الإنترنت لم يعد رفاهية. صممنا باقة <strong>"المواقع الشخصية"</strong> خصيصاً للمستقلين، المهندسين، والأطباء لتقديم أنفسهم باحترافية وبناء ثقة قوية مع عملائهم. <br/>
+                <span class="text-gray-900 font-bold bg-yellow-100 px-2 py-1 mt-3 inline-block rounded">بتكلفة اقتصادية جداً ومناسبة لك!</span>
             </p>
             
-            <!-- أزرار الإجراء (CTA) -->
+            <!-- أزرار الإجراء -->
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 w-full">
                 <a href="#demos" class="bg-gray-900 text-white font-bold py-3.5 px-6 rounded-xl shadow-xl hover:bg-gray-800 transition transform hover:-translate-y-1 flex items-center justify-center gap-2 text-sm md:text-base w-full sm:w-auto">
                     <i class="fa-solid fa-layer-group text-yellow-400 text-lg"></i> 
-                    <span>استكشف النماذج (Demos)</span>
+                    <span>استكشف النماذج المتاحة</span>
                 </a>
                 
-                <a href="#benefits" class="bg-white border-2 border-gray-200 text-gray-700 font-bold py-3.5 px-6 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition transform hover:-translate-y-1 flex items-center justify-center gap-2 text-sm md:text-base w-full sm:w-auto">
-                    <i class="fa-solid fa-circle-question text-gray-400"></i>
-                    <span>لماذا تحتاج هذا الموقع؟</span>
+                <a href="#qr-feature" class="bg-white border-2 border-gray-200 text-gray-700 font-bold py-3.5 px-6 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition transform hover:-translate-y-1 flex items-center justify-center gap-2 text-sm md:text-base w-full sm:w-auto">
+                    <i class="fa-solid fa-qrcode text-gray-400"></i>
+                    <span>ميزة الكارت الذكي</span>
                 </a>
             </div>
 
-            <!-- مميزات سريعة تبني الثقة -->
-            <div class="grid grid-cols-2 gap-4 text-sm font-bold text-gray-700">
-                <div class="flex items-center gap-2"><i class="fa-solid fa-hand-holding-dollar text-green-500 text-lg"></i> تكلفة منخفضة ومناسبة</div>
-                <div class="flex items-center gap-2"><i class="fa-solid fa-sliders text-blue-500 text-lg"></i> مرونة تامة في التعديل</div>
+            <!-- مميزات سريعة -->
+            <div class="grid grid-cols-2 gap-4 text-sm font-bold text-gray-700 mt-6 pt-6 border-t border-gray-200">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-hand-holding-dollar text-green-500 text-lg"></i> تكلفة منخفضة </div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-yellow-500 text-lg"></i> استلام فوري</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-mobile-screen text-blue-500 text-lg"></i> متجاوب مع الموبايل</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-qrcode text-purple-500 text-lg"></i> شامل الكود الذكي</div>
             </div>
         </div>
 
@@ -132,14 +166,14 @@
                 </div>
                 <div class="p-8 bg-white aspect-[4/3] flex flex-col items-center justify-center text-center relative overflow-hidden bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNlNWE1YTUiIG9wYWNpdHk9IjAuMiIvPjwvc3ZnPg==')]">
                     <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-0"></div>
-                    <div class="w-24 h-24 bg-yellow-100 rounded-full mb-5 border-4 border-white shadow-lg flex items-center justify-center relative z-10">
-                        <i class="fa-solid fa-user-tie text-5xl text-yellow-600"></i>
+                    <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mb-5 border-4 border-white shadow-xl flex items-center justify-center relative z-10">
+                        <i class="fa-solid fa-user-tie text-5xl text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-black text-gray-800 mb-2 relative z-10">اسمك يظهر هنا</h3>
+                    <h3 class="text-2xl font-black text-gray-800 mb-2 relative z-10">الاسم يظهر هنا</h3>
                     <p class="text-gray-500 font-medium mb-6 relative z-10">المسمى الوظيفي الخاص بك</p>
                     <div class="flex gap-3 relative z-10">
-                        <div class="px-6 py-2 bg-gray-900 text-white rounded-lg shadow-sm text-sm font-bold">تواصل معي</div>
-                        <div class="px-6 py-2 bg-gray-100 text-gray-600 rounded-lg shadow-sm text-sm font-bold">حمل الـ CV</div>
+                        <div class="px-6 py-2 bg-gray-900 text-white rounded-lg shadow-sm text-sm font-bold animate-bounce">تواصل معي</div>
+                        <div class="px-6 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg shadow-sm text-sm font-bold">حمل الـ CV</div>
                     </div>
                 </div>
             </div>
@@ -147,33 +181,54 @@
 
     </section>
 
-    <!-- قسم المزايا (تسويق فكرة التخصيص) -->
-    <section id="benefits" class="bg-white py-16 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <!-- قسم الميزة الإضافية: QR Code (جديد) -->
+    <section id="qr-feature" class="py-16 md:py-24 bg-gray-900 text-white relative overflow-hidden">
+        <!-- تأثيرات خلفية -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-yellow-500 opacity-10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 opacity-10 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10" x-data="{ 
+            domain: 'Dr-Ahmed.com', 
+            get qrUrl() { return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=111827&data=https://' + encodeURIComponent(this.domain) } 
+        }">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- نص وشرح الميزة -->
+                <div data-aos="fade-left">
+                    <span class="bg-yellow-500 text-gray-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">ميزة إضافية مجانية</span>
+                    <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+                        موقعك هو كارتك الشخصي <br><span class="text-yellow-400">الذكي (QR Code)</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                        عند استلامك للموقع، ستحصل على كود <strong>QR Code</strong> عالي الجودة خاص برابط موقعك. لن تحتاج لطباعة مئات الكروت الشخصية الورقية بعد اليوم! فقط دع العميل يمسح الكود بكاميرا هاتفه ليصل لجميع خدماتك، أعمالك، وطرق التواصل معك فوراً.
+                    </p>
+                    
+                    <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-inner">
+                        <label class="block text-sm font-bold text-gray-400 mb-2">جرب بنفسك! اكتب اسمك لترى كيف سيتحول لـ QR:</label>
+                        <div class="flex">
+                            <span class="bg-gray-700 px-4 py-3 rounded-r-lg text-gray-400 border border-l-0 border-gray-600 font-mono" dir="ltr">https://</span>
+                            <input type="text" x-model="domain" class="w-full bg-gray-900 text-white px-4 py-3 rounded-l-lg border border-gray-600 focus:outline-none focus:border-yellow-400 font-mono transition" dir="ltr" placeholder="your-name.com">
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">تخصيص بنسبة 100%</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">النماذج بالأسفل هي مجرد نقطة انطلاق (Demos). نحن مستعدون لتغيير الألوان، الخطوط، وإضافة أو حذف الأقسام بناءً على رغبتك لتعكس شخصيتك تماماً.</p>
                 </div>
 
-                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute -top-10 -right-10 text-yellow-500 opacity-10 text-9xl"><i class="fa-solid fa-tag"></i></div>
-                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 relative z-10">
-                        <i class="fa-solid fa-sack-dollar"></i>
+                <!-- عرض الـ QR تفاعلي -->
+                <div class="flex justify-center" data-aos="fade-right">
+                    <div class="bg-white p-8 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500 max-w-sm w-full relative">
+                        <div class="absolute -top-4 -right-4 bg-yellow-400 text-gray-900 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg animate-bounce">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <h4 class="text-center text-gray-900 font-black text-xl mb-1">امسح الكود</h4>
+                        <p class="text-center text-gray-500 text-sm mb-6 font-mono" x-text="domain"></p>
+                        <div class="bg-gray-100 p-4 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-300">
+                            <!-- توليد الـ QR باستخدام AlpineJS و API -->
+                            <img :src="qrUrl" class="w-full h-auto rounded-lg" alt="QR Code Preview">
+                        </div>
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center gap-2 text-gray-800 font-bold bg-gray-100 px-4 py-2 rounded-full text-sm">
+                                <i class="fa-solid fa-mobile-screen"></i> جاهز للطباعة والمسح
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 relative z-10">تكلفة منخفضة ومدروسة</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed relative z-10">لأنها مواقع شخصية، قمنا بتسعيرها لتكون في متناول الجميع. احصل على جودة البرمجة العالمية بتكلفة اقتصادية تناسب ميزانيتك كمستقل أو موظف.</p>
-                </div>
-
-                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
-                        <i class="fa-solid fa-rocket"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">استلام سريع جداً</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">لأن الهياكل الأساسية جاهزة ومختبرة مسبقاً، بمجرد تزويدنا بصورك ومعلوماتك، سيكون موقعك جاهزاً للعمل والإطلاق في وقت قياسي.</p>
                 </div>
             </div>
         </div>
@@ -184,7 +239,7 @@
         <div class="max-w-7xl mx-auto px-4 w-full">
             
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">معرض النماذج المبدئية (Demos)</h2>
+                <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-4">اختر القالب الذي يمثلك</h2>
                 
                 <!-- رسالة تنبيه تسويقية هامة -->
                 <div class="bg-blue-50 border-r-4 border-blue-500 p-4 md:p-6 rounded-l-xl max-w-3xl mx-auto text-right shadow-sm mt-6 inline-block">
@@ -192,83 +247,118 @@
                         <i class="fa-solid fa-circle-info"></i> تنبيه هام للتجربة:
                     </h4>
                     <p class="text-sm md:text-base text-blue-700 leading-relaxed font-medium">
-                        الروابط بالأسفل تعرض <strong>"نماذج تجريبية"</strong> صممناها لتوضيح شكل الموقع وحركته فقط. <br>
-                        عند حجز موقعك، هذه النماذج ليست نهائية! سيتم دمج صورك الحقيقية، نصوصك، وتعديل أي جزء في التصميم ليطابق متطلباتك 100%.
+                        الروابط بالأسفل تعرض <strong>"نماذج تجريبية (Demos)"</strong>. جميع هذه القوالب قابلة للتخصيص بنسبة 100%. عند حجز موقعك، سيتم دمج صورك، نصوصك، وتعديل الألوان لتطابق هويتك تماماً.
                     </p>
                 </div>
             </div>
 
-            <!-- شبكة النماذج الـ 4 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- شبكة النماذج الـ 6 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <!-- النموذج الأول -->
-                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group" data-aos="fade-up" data-aos-delay="0">
-                    <div class="p-6 md:p-8">
+                <!-- النموذج الأول: CV -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="0">
+                    <div class="p-6 flex flex-col flex-grow">
                         <div class="flex justify-between items-start mb-5">
                             <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-blue-100">
                                 <i class="fa-solid fa-id-card-clip"></i>
                             </div>
                             <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 1</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">قالب السيرة الذاتية (CV)</h3>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">تصميم مثالي للمبرمجين، المهندسين، والموظفين. يبرز خبراتك المهنية، وتسلسل التعليم، ومستوى مهاراتك بشكل تفاعلي ومرتب يسهل قراءته من مديري التوظيف.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب السيرة الذاتية (CV)</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">تصميم مثالي للمبرمجين والموظفين. يبرز خبراتك المهنية وتسلسل التعليم بشكل تفاعلي ومرتب يسهل قراءته من مديري التوظيف.</p>
                         
-                        <a href="me1/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3.5 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm">
-                            <i class="fa-solid fa-eye ml-1"></i> معاينة هذا النموذج
+                        <a href="me1/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
                         </a>
                     </div>
                 </div>
 
-                <!-- النموذج الثاني -->
-                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="p-6 md:p-8">
+                <!-- النموذج الثاني: الإبداعي -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6 flex flex-col flex-grow">
                         <div class="flex justify-between items-start mb-5">
                             <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-purple-100">
                                 <i class="fa-solid fa-palette"></i>
                             </div>
                             <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 2</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">قالب معرض الأعمال الإبداعي</h3>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">خيارك الأول إذا كنت (مصمم جرافيك، مصور، صانع محتوى). يعتمد على عرض الصور بطريقة "Bento Grid" الحديثة بألوان جذابة وتأثيرات حركية مبهرة للعين.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب المعرض الإبداعي</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">مثالي لمصممي الجرافيك والمصورين. يعتمد على عرض الصور بطريقة "Bento Grid" بألوان جذابة وتأثيرات حركية مبهرة للعين.</p>
                         
-                        <a href="me2/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3.5 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm">
-                            <i class="fa-solid fa-eye ml-1"></i> معاينة هذا النموذج
+                        <a href="me2/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
                         </a>
                     </div>
                 </div>
 
-                <!-- النموذج الثالث -->
-                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="p-6 md:p-8">
+                <!-- النموذج الثالث: الاستشاري المستقل -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 flex flex-col flex-grow">
                         <div class="flex justify-between items-start mb-5">
                             <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-emerald-100">
                                 <i class="fa-solid fa-briefcase"></i>
                             </div>
                             <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 3</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">قالب المستقل / الاستشاري</h3>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">مصمم خصيصاً للمستقلين (Freelancers) والاستشاريين لبيع الخدمات. يتميز بطابع رسمي كلاسيكي يبرز الخدمات المقدمة ويحتوي على نموذج تواصل مباشر لطلب الخدمة.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب المستقل / الاستشاري</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">مصمم خصيصاً للمستقلين (Freelancers) لبيع الخدمات. يتميز بطابع رسمي كلاسيكي يبرز الخدمات ويحتوي على نموذج تواصل مباشر.</p>
                         
-                        <a href="me3/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3.5 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm">
-                            <i class="fa-solid fa-eye ml-1"></i> معاينة هذا النموذج
+                        <a href="me3/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
                         </a>
                     </div>
                 </div>
 
-                <!-- النموذج الرابع -->
-                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="p-6 md:p-8">
+                <!-- النموذج الرابع: المدربين -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6 flex flex-col flex-grow">
                         <div class="flex justify-between items-start mb-5">
                             <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-orange-100">
-                                <i class="fa-solid fa-bolt"></i>
+                                <i class="fa-solid fa-dumbbell"></i>
                             </div>
                             <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 4</span>
                         </div>
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">قالب المدربين / الطاقة العالية</h3>
-                        <p class="text-gray-500 text-sm mb-6 leading-relaxed">تصميم حماسي بـ "الوضع المظلم Dark Mode" مخصص للمدربين الرياضيين وأخصائيي التغذية. يركز على عرض التحولات الرياضية واستقبال طلبات المشتركين الجدد.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب الكابتن / الرياضي</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">تصميم حماسي بالوضع المظلم (Dark Mode) مخصص للمدربين الرياضيين وأخصائيي التغذية لعرض التحولات واستقبال طلبات الاشتراك.</p>
                         
-                        <a href="me4/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3.5 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm">
-                            <i class="fa-solid fa-eye ml-1"></i> معاينة هذا النموذج
+                        <a href="me4/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
+                        </a>
+                    </div>
+                </div>
+
+                <!-- النموذج الخامس: المهندسين -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-5">
+                            <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-yellow-100">
+                                <i class="fa-solid fa-helmet-safety"></i>
+                            </div>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 5</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب المهندسين والمقاولات</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">قالب هندسي فخم للمهندسين المعماريين، المدنيين والمقاولين. يدعم عرض المشاريع السابقة، المهارات الهندسية بطريقة احترافية وراقية.</p>
+                        
+                        <a href="me5/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
+                        </a>
+                    </div>
+                </div>
+
+                <!-- النموذج السادس: الأطباء -->
+                <div class="bg-white rounded-2xl p-2 border border-gray-200 card-hover relative group flex flex-col" data-aos="fade-up" data-aos-delay="500">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-5">
+                            <div class="w-14 h-14 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-cyan-100">
+                                <i class="fa-solid fa-stethoscope"></i>
+                            </div>
+                            <span class="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Demo 6</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">قالب الأطباء والعيادات</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed flex-grow">تصميم طبي هادئ ويبعث على الثقة. مصمم للأطباء، الاستشاريين والعيادات. يتيح للمرضى التعرف على خدماتك وحجز المواعيد بسهولة عبر الواتساب.</p>
+                        
+                        <a href="me6/index.html" target="_blank" class="block w-full bg-white text-gray-900 font-bold py-3 text-center rounded-xl transition border-2 border-gray-900 hover:bg-gray-900 hover:text-white shadow-sm mt-auto">
+                            <i class="fa-solid fa-eye ml-1"></i> معاينة النموذج
                         </a>
                     </div>
                 </div>
@@ -291,7 +381,7 @@
             
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
                 <!-- رابط الواتساب مخصص لطلب المواقع -->
-                <a href="https://wa.me/201115003099?text=أهلاً بشمهندس مينا، قمت بتصفح قوالب المواقع (Demos). وأريد الاستفسار عن تكلفة وتفاصيل تصميم موقع شخصي خاص بي وتعديله ليناسب متطلباتي." target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-4 rounded-xl transition w-full sm:w-auto flex items-center justify-center gap-3 text-lg shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1">
+                <a href="https://wa.me/201115003099?text=أهلاً بشمهندس، قمت بتصفح قوالب المواقع (Demos). وأريد الاستفسار عن تفاصيل وتكلفة تصميم موقع شخصي خاص بي." target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-4 rounded-xl transition w-full sm:w-auto flex items-center justify-center gap-3 text-lg shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1">
                     <i class="fa-brands fa-whatsapp text-2xl"></i> تواصل عبر الواتساب للبدء
                 </a>
             </div>

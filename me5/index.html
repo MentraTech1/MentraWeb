@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+  <head>
+    <title class="tr" data-en="Eng. Portfolio" data-ar="ملف أعمال المهندس">Eng. Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+     <link rel="icon" type="image/png" sizes="32x32" href="https://mentra-tech.pages.dev/assets/logo.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#ffbd39',
+              darkBg: '#121212',
+              darkCard: '#1e1e1e',
+              lightBg: '#f8f9fa',
+            },
+            fontFamily: {
+              poppins: ['Poppins', 'sans-serif'],
+              cairo: ['Cairo', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      html[dir="ltr"] body { font-family: 'Poppins', sans-serif; }
+      html[dir="rtl"] body { font-family: 'Cairo', sans-serif; text-align: right; }
+      html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4, html[dir="rtl"] h5, html[dir="rtl"] p, html[dir="rtl"] span, html[dir="rtl"] button, html[dir="rtl"] input, html[dir="rtl"] textarea, html[dir="rtl"] a, html[dir="rtl"] li {
+          font-family: 'Cairo', sans-serif !important;
+      }
+      
+      body, header, div, input, textarea, button, footer {
+          transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+      
+      /* إعدادات السلايدر المحسنة بالأنيميشن */
+      .slide-item { display: none; }
+      .slide-item.active { display: block; }
+
+      /* كلاسات مخصصة للانيميشن عند التمرير Scroll */
+      .reveal-up { transform: translateY(40px); transition: all 0.8s ease; }
+      .reveal-left { transform: translateX(-40px); transition: all 0.8s ease; }
+      .reveal-right { transform: translateX(40px); transition: all 0.8s ease; }
+      
+      .revealed { opacity: 1 !important; transform: translate(0) !important; }
+    </style>
+  </head>
+  <body class="bg-lightBg text-[#444] dark:bg-darkBg dark:text-[#e0e0e0] antialiased overflow-x-hidden">
+	  
+    <div class="fixed bottom-5 left-5 z-[9999] flex flex-col gap-3">
+        <button id="langToggle" class="w-[55px] h-[55px] rounded-full bg-primary text-[#111] border-2 border-white shadow-lg font-bold flex items-center justify-center hover:-translate-y-1 hover:scale-110 active:scale-95 transition-all duration-300" title="تغيير اللغة / Change Language">AR</button>
+        <button id="themeToggle" class="w-[55px] h-[55px] rounded-full bg-primary text-[#111] border-2 border-white shadow-lg font-bold flex items-center justify-center hover:-translate-y-1 hover:scale-110 active:scale-95 transition-all duration-300" title="الوضع الليلي والنهاري / Dark & Light Mode">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+
+    <header class="sticky top-0 z-[50] w-full bg-white/95 dark:bg-[#1a1a1a]/95 backdrop-blur-md shadow-md dark:shadow-black/50">
+      <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+        <a class="text-xl font-bold text-[#111] dark:text-white leading-tight tr hover:text-primary transition-colors duration-300" href="index.html" data-en="Portfolio<br><span style='font-size:12px'>Engineer</span>" data-ar="ملف الأعمال<br><span style='font-size:12px'>مهندس</span>">
+          Portfolio<br><span style='font-size:12px'>Engineer</span>
+        </a>
+        
+        <button id="menuToggle" class="lg:hidden text-2xl text-[#111] dark:text-white focus:outline-none flex items-center gap-2">
+          <i class="fa-solid fa-bars"></i>
+          <span class="text-sm font-medium tr" data-en="Menu" data-ar="القائمة">Menu</span>
+        </button>
+
+        <nav id="navMenu" class="hidden lg:flex absolute lg:relative top-full left-0 w-full lg:w-auto bg-white dark:bg-[#1a1a1a] lg:bg-transparent shadow-md lg:shadow-none p-4 lg:p-0 flex-col lg:flex-row gap-4 lg:gap-6 font-semibold">
+          <a href="#home-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Home" data-ar="الرئيسية">Home</span></a>
+          <a href="#about-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="About" data-ar="من أنا">About</span></a>
+          <a href="#resume-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Resume" data-ar="السيرة الذاتية">Resume</span></a>
+          <a href="#services-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Services" data-ar="الخدمات">Services</span></a>
+          <a href="#skills-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Skills" data-ar="المهارات">Skills</span></a>
+          <a href="#projects-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Projects" data-ar="المشاريع">Projects</span></a>
+          <a href="#contact-section" class="hover:text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 py-1"><span class="tr" data-en="Contact" data-ar="اتصل بي">Contact</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home-section" class="relative overflow-hidden w-full h-[85vh] lg:h-[90vh]">
+      <div id="tailwindSlider" class="w-full h-full relative">
+        
+        <div class="slide-item active w-full h-full relative">
+          <div class="absolute inset-0 bg-white/85 dark:bg-black/75 z-10"></div>
+          <div class="container mx-auto h-full px-4 flex flex-col lg:flex-row items-center justify-between relative z-20">
+            <div class="w-full lg:w-1/2 flex flex-col justify-center h-full order-2 lg:order-1 pt-10 lg:pt-0 slider-content">
+              <span class="text-xl font-medium text-primary mb-2 block tr animate__animated animate__fadeInDown" data-en="Hello!" data-ar="أهلاً بك!">Hello!</span>
+              <h1 class="text-4xl lg:text-6xl font-black text-[#111] dark:text-white mb-4 tr animate__animated animate__fadeInLeft animate__delay-1s" data-en="I'm <span class='text-primary'>Eng. Ahmed</span>" data-ar="أنا <span class='text-primary'>المهندس أحمد</span>">I'm <span class="text-primary">Eng. Ahmed</span></h1>
+              <h2 class="text-2xl font-bold mb-6 text-[#333] dark:text-gray-300 tr animate__animated animate__fadeInUp animate__delay-1s" data-en="A Professional Engineer" data-ar="مهندس محترف">A Professional Engineer</h2>
+              <div class="flex gap-4 animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#contact-section" class="bg-primary hover:bg-amber-500 hover:scale-105 active:scale-95 text-[#111] font-bold py-3 px-6 rounded-md shadow-md transition-all tr" data-en="Hire me" data-ar="وظفني">Hire me</a>
+                <a href="#projects-section" class="border-2 border-[#111] dark:border-white hover:bg-[#111] hover:text-white dark:hover:bg-white dark:hover:text-[#111] hover:scale-105 active:scale-95 font-bold py-3 px-6 rounded-md transition-all tr" data-en="My works" data-ar="أعمالي">My works</a>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 h-[40vh] lg:h-full bg-cover bg-center rounded-lg lg:rounded-none order-1 lg:order-2 animate__animated animate__zoomIn" style="background-image:url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1200');"></div>
+          </div>
+        </div>
+
+        <div class="slide-item w-full h-full relative">
+          <div class="absolute inset-0 bg-white/85 dark:bg-black/75 z-10"></div>
+          <div class="container mx-auto h-full px-4 flex flex-col lg:flex-row items-center justify-between relative z-20">
+            <div class="w-full lg:w-1/2 flex flex-col justify-center h-full order-2 lg:order-1 pt-10 lg:pt-0 slider-content">
+              <span class="text-xl font-medium text-primary mb-2 block tr animate__animated animate__fadeInDown" data-en="Welcome!" data-ar="مرحباً!">Welcome!</span>
+              <h1 class="text-4xl lg:text-6xl font-black text-[#111] dark:text-white mb-4 tr animate__animated animate__fadeInLeft" data-en="I'm a <span class='text-primary'>Consulting Engineer</span>" data-ar="أنا <span class='text-primary'>مهندس استشاري</span>">I'm a <span class="text-primary">Consulting Engineer</span></h1>
+              <div class="flex gap-4 mt-4 animate__animated animate__fadeInUp">
+                <a href="#contact-section" class="bg-primary hover:bg-amber-500 hover:scale-105 active:scale-95 text-[#111] font-bold py-3 px-6 rounded-md shadow-md transition-all tr" data-en="Contact me" data-ar="تواصل معي">Contact me</a>
+                <a href="#projects-section" class="border-2 border-[#111] dark:border-white hover:bg-[#111] hover:text-white dark:hover:bg-white dark:hover:text-[#111] hover:scale-105 active:scale-95 font-bold py-3 px-6 rounded-md transition-all tr" data-en="My works" data-ar="مشاريعي">My works</a>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 h-[40vh] lg:h-full bg-cover bg-center rounded-lg lg:rounded-none order-1 lg:order-2 animate__animated animate__zoomIn" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200');"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-20 overflow-hidden" id="about-section">
+    	<div class="container mx-auto px-4">
+    		<div class="flex flex-col lg:flex-row gap-12 items-center">
+    			<div class="w-full lg:w-5/12 opacity-0 reveal-left">
+    				<div class="w-full h-[450px] bg-cover bg-center rounded-xl shadow-xl overflow-hidden relative group" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600');">
+    					<div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-500 scale-110 group-hover:scale-100"></div>
+    				</div>
+    			</div>
+    			<div class="w-full lg:w-7/12 opacity-0 reveal-right">
+            <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="About" data-ar="نبذة">About</span>
+            <h2 class="text-3xl font-black mb-6 mt-[-20px] text-[#111] dark:text-white tr" data-en="About Me" data-ar="نبذة عني">About Me</h2>
+            <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-400 tr" data-en="I am a passionate engineer with years of experience in managing and designing engineering projects, ensuring the highest quality standards." data-ar="أنا مهندس شغوف أمتلك سنوات من الخبرة في إدارة وتصميم المشاريع الهندسية مع ضمان أعلى معايير الجودة والتنفيذ الدقيق.">I am a passionate engineer with years of experience in managing and designing engineering projects, ensuring the highest quality standards.</p>
+            
+            <ul class="mt-8 space-y-4">
+            	<li class="flex flex-col sm:flex-row border-b border-gray-200 dark:border-gray-800 pb-2 hover:translate-x-2 transition-transform duration-300"><span class="w-32 font-bold text-primary tr" data-en="Name:" data-ar="الاسم:">Name:</span> <span class="tr" data-en="Eng. Ahmed" data-ar="م. أحمد">Eng. Ahmed</span></li>
+            	<li class="flex flex-col sm:flex-row border-b border-gray-200 dark:border-gray-800 pb-2 hover:translate-x-2 transition-transform duration-300"><span class="w-32 font-bold text-primary tr" data-en="Specialty:" data-ar="التخصص:">Specialty:</span> <span class="tr" data-en="Engineering" data-ar="الهندسة">Engineering</span></li>
+            	<li class="flex flex-col sm:flex-row border-b border-gray-200 dark:border-gray-800 pb-2 hover:translate-x-2 transition-transform duration-300"><span class="w-32 font-bold text-primary tr" data-en="Location:" data-ar="الموقع:">Location:</span> <span class="tr" data-en="Dubai, UAE" data-ar="دبي، الإمارات">Dubai, UAE</span></li>
+            	<li class="flex flex-col sm:flex-row border-b border-gray-200 dark:border-gray-800 pb-2 hover:translate-x-2 transition-transform duration-300"><span class="w-32 font-bold text-primary tr" data-en="Email:" data-ar="البريد:">Email:</span> <span>eng.ahmed@gmail.com</span></li>
+            	<li class="flex flex-col sm:flex-row pb-2 hover:translate-x-2 transition-transform duration-300"><span class="w-32 font-bold text-primary tr" data-en="Phone:" data-ar="الهاتف:">Phone: </span> <span dir="ltr" class="text-left"> +971-1234-5678</span></li>
+            </ul>
+
+            <div class="mt-8 flex items-center gap-6">
+              <div>
+                <span class="text-4xl font-black text-primary block animate-pulse">120</span>
+                <span class="text-sm font-semibold tr" data-en="Projects Completed" data-ar="مشروع مكتمل">Projects Completed</span>
+              </div>
+              <a href="#" class="bg-primary hover:bg-amber-500 hover:scale-105 active:scale-95 text-[#111] font-bold py-3 px-6 rounded-md shadow-md transition-all tr" data-en="Download CV" data-ar="تحميل السيرة الذاتية">Download CV</a>
+            </div>
+	        </div>
+        </div>
+    	</div>
+    </section>
+
+    <section class="py-20 bg-white/50 dark:bg-black/20 overflow-hidden" id="resume-section">
+    	<div class="container mx-auto px-4">
+    		<div class="text-center mb-16 opacity-0 reveal-up">
+          <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="Resume" data-ar="السيرة">Resume</span>
+          <h2 class="text-3xl font-black mb-4 mt-[-20px] text-[#111] dark:text-white tr" data-en="Resume" data-ar="السيرة الذاتية">Resume</h2>
+          <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto tr" data-en="An overview of my academic background and professional engineering experience." data-ar="نبذة عن خلفيتي الأكاديمية وخبراتي المهنية المتنوعة في المجال الهندسي.">An overview of my academic background and professional engineering experience.</p>
+        </div>
+
+    		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    			<div class="space-y-8 opacity-0 reveal-left">
+    				<div class="bg-white dark:bg-darkCard p-8 rounded-lg shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    					<span class="text-primary font-bold text-sm block mb-2">2010 - 2015</span>
+    					<h2 class="text-xl font-bold mb-1 text-[#111] dark:text-white tr" data-en="B.Sc. in Engineering" data-ar="بكالوريوس هندسة">B.Sc. in Engineering</h2>
+    					<span class="text-gray-400 dark:text-gray-500 font-medium block mb-4 tr" data-en="Cairo University" data-ar="جامعة القاهرة">Cairo University</span>
+    					<p class="tr" data-en="Studied fundamental and advanced engineering principles, structural design, and project management." data-ar="دراسة المبادئ الهندسية الأساسية والمتقدمة، التصميم الإنشائي، وإدارة المشاريع.">Studied fundamental and advanced engineering principles, structural design, and project management.</p>
+    				</div>
+    				<div class="bg-white dark:bg-darkCard p-8 rounded-lg shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    					<span class="text-primary font-bold text-sm block mb-2">2016 - 2018</span>
+    					<h2 class="text-xl font-bold mb-1 text-[#111] dark:text-white tr" data-en="Master's Degree" data-ar="درجة الماجستير">Master's Degree</h2>
+    					<span class="text-gray-400 dark:text-gray-500 font-medium block mb-4 tr" data-en="Technical University" data-ar="الجامعة التقنية">Technical University</span>
+    					<p class="tr" data-en="Specialized in advanced engineering management and sustainable development." data-ar="التخصص في الإدارة الهندسية المتقدمة وتحقيق أهداف التنمية المستدامة.">Specialized in advanced engineering management and sustainable development.</p>
+    				</div>
+    			</div>
+          <div class="space-y-8 opacity-0 reveal-right">
+    				<div class="bg-white dark:bg-darkCard p-8 rounded-lg shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    					<span class="text-primary font-bold text-sm block mb-2">2018 - 2021</span>
+    					<h2 class="text-xl font-bold mb-1 text-[#111] dark:text-white tr" data-en="Project Engineer" data-ar="مهندس مشروع">Project Engineer</h2>
+    					<span class="text-gray-400 dark:text-gray-500 font-medium block mb-4 tr" data-en="Global Construction Co." data-ar="شركة المقاولات العالمية">Global Construction Co.</span>
+    					<p class="tr" data-en="Supervised site operations, managed technical teams, and ensured safety compliance." data-ar="الإشراف على عمليات الموقع، إدارة الفرق الفنية، وضمان الالتزام بقواعد السلامة.">Supervised site operations, managed technical teams, and ensured safety compliance.</p>
+    				</div>
+    				<div class="bg-white dark:bg-darkCard p-8 rounded-lg shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    					<span class="text-primary font-bold text-sm block mb-2">2021 - Present</span>
+    					<h2 class="text-xl font-bold mb-1 text-[#111] dark:text-white tr" data-en="Senior Consulting Eng." data-ar="مهندس استشاري أول">Senior Consulting Eng.</h2>
+    					<span class="text-gray-400 dark:text-gray-500 font-medium block mb-4 tr" data-en="Engineering Solutions Ltd." data-ar="حلول الهندسة المحدودة">Engineering Solutions Ltd.</span>
+    					<p class="tr" data-en="Leading engineering designs, client consultations, and structural integrity analysis." data-ar="قيادة التصاميم الهندسية، تقديم الاستشارات للعملاء، وتحليل السلامة الإنشائية.">Leading engineering designs, client consultations, and structural integrity analysis.</p>
+    				</div>
+    			</div>
+    		</div>
+
+    		<div class="text-center mt-12 opacity-0 reveal-up">
+    			<p><a href="#" class="bg-primary hover:bg-amber-500 hover:scale-105 active:scale-95 text-[#111] font-bold py-4 px-8 rounded-md shadow-lg inline-block transition-all tr" data-en="Download CV" data-ar="تحميل السيرة الذاتية">Download CV</a></p>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="py-20 overflow-hidden" id="services-section">
+    	<div class="container mx-auto px-4">
+    		<div class="text-center mb-16 opacity-0 reveal-up">
+          <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="Services" data-ar="الخدمات">Services</span>
+          <h2 class="text-3xl font-black mb-4 mt-[-20px] text-[#111] dark:text-white tr" data-en="Engineering Services" data-ar="الخدمات الهندسية">Engineering Services</h2>
+          <p class="text-gray-500 dark:text-gray-400 tr" data-en="Providing high-quality engineering solutions tailored to client needs." data-ar="نقدم حلولاً هندسية مبتكرة وعالية الجودة مصممة لتلبية احتياجات العملاء.">Providing high-quality engineering solutions tailored to client needs.</p>
+        </div>
+
+    		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-0 reveal-up">
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-chart-line"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Project Management" data-ar="إدارة المشاريع">Project Management</h3>
+					</div>
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-compass-drafting"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Engineering Design" data-ar="التصميم الهندسي">Engineering Design</h3>
+					</div>
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-helmet-safety"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Site Supervision" data-ar="الإشراف الموقعي">Site Supervision</h3>
+					</div>
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-list-check"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Quality Control" data-ar="مراقبة الجودة">Quality Control</h3>
+					</div>
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-comments"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Consulting" data-ar="الاستشارات">Consulting</h3>
+					</div>
+					<div class="bg-white dark:bg-darkCard p-8 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 group">
+						<div class="text-4xl text-primary mb-6 group-hover:scale-125 group-hover:rotate-6 transition-transform duration-300"><i class="fa-solid fa-shield-halved"></i></div>
+						<h3 class="text-xl font-bold text-[#111] dark:text-white tr" data-en="Safety Planning" data-ar="تخطيط السلامة">Safety Planning</h3>
+					</div>
+				</div>
+    	</div>
+    </section>
+
+    <section class="py-20 bg-white/50 dark:bg-black/20 overflow-hidden" id="skills-section">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-16 opacity-0 reveal-up">
+        <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="Skills" data-ar="المهارات">Skills</span>
+        <h2 class="text-3xl font-black mb-4 mt-[-20px] text-[#111] dark:text-white tr" data-en="My Skills" data-ar="مهاراتي الأساسية">My Skills</h2>
+      </div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 opacity-0 reveal-up">
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="AutoCAD" data-ar="أوتوكاد">AutoCAD</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:90%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">90%</span>
+					</div>
+				</div>
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="Project Management" data-ar="إدارة المشاريع">Project Management</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:85%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">85%</span>
+					</div>
+				</div>
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="Revit" data-ar="ريفيت">Revit</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:75%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">75%</span>
+					</div>
+				</div>
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="Structural Analysis" data-ar="التحليل الإنشائي">Structural Analysis</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:90%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">90%</span>
+					</div>
+				</div>
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="Primavera P6" data-ar="بريمافيرا">Primavera P6</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:80%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">80%</span>
+					</div>
+				</div>
+				<div class="space-y-2">
+					<h3 class="text-lg font-semibold text-[#111] dark:text-white tr" data-en="Team Leadership" data-ar="قيادة فرق العمل">Team Leadership</h3>
+					<div class="w-full bg-gray-200 dark:bg-gray-800 h-3 rounded-full overflow-hidden relative">
+						 <div class="bg-primary h-full rounded-full transition-all duration-1000 origin-left scale-x-0 skill-progress" style="width:95%"></div>
+             <span class="absolute top-[-2px] right-2 text-xs font-bold text-[#111] dark:text-white">95%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section class="py-20 overflow-hidden" id="projects-section">
+    	<div class="container mx-auto px-4">
+    		<div class="text-center mb-16 opacity-0 reveal-up">
+          <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="Projects" data-ar="المشاريع">Projects</span>
+          <h2 class="text-3xl font-black mb-4 mt-[-20px] text-[#111] dark:text-white tr" data-en="Our Projects" data-ar="معرض أعمالي">Our Projects</h2>
+        </div>
+
+    		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 reveal-up">
+    			<div class="md:col-span-1 group relative h-[350px] bg-cover bg-center rounded-lg shadow-md overflow-hidden flex items-end p-6" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500');">
+    				<div class="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-colors duration-300 z-10"></div>
+	    			<div class="text-center w-full relative z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+	    				<h3 class="text-xl font-bold text-white"><a href="#" class="hover:text-primary transition-colors tr" data-en="Commercial Tower" data-ar="برج تجاري">Commercial Tower</a></h3>
+	    				<span class="text-primary text-sm font-medium tr" data-en="Structural Design" data-ar="تصميم إنشائي">Structural Design</span>
+	    			</div>
+    			</div>
+          <div class="md:col-span-2 group relative h-[350px] bg-cover bg-center rounded-lg shadow-md overflow-hidden flex items-end p-6" style="background-image: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800');">
+    				<div class="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-colors duration-300 z-10"></div>
+	    			<div class="text-center w-full relative z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+	    				<h3 class="text-xl font-bold text-white"><a href="#" class="hover:text-primary transition-colors tr" data-en="Bridge Construction" data-ar="بناء جسر حيوي">Bridge Construction</a></h3>
+	    				<span class="text-primary text-sm font-medium tr" data-en="Site Management" data-ar="إدارة وتنفيذ المواقع">Site Management</span>
+	    			</div>
+  				</div>
+          <div class="md:col-span-2 group relative h-[350px] bg-cover bg-center rounded-lg shadow-md overflow-hidden flex items-end p-6" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800');">
+    				<div class="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-colors duration-300 z-10"></div>
+	    			<div class="text-center w-full relative z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+	    				<h3 class="text-xl font-bold text-white"><a href="#" class="hover:text-primary transition-colors tr" data-en="Residential Complex" data-ar="مجمع سكني متكامل">Residential Complex</a></h3>
+	    				<span class="text-primary text-sm font-medium tr" data-en="Consulting" data-ar="استشارات هندسية">Consulting</span>
+	    			</div>
+    			</div>
+          <div class="md:col-span-1 group relative h-[350px] bg-cover bg-center rounded-lg shadow-md overflow-hidden flex items-end p-6" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500');">
+    				<div class="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-colors duration-300 z-10"></div>
+	    			<div class="text-center w-full relative z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+	    				<h3 class="text-xl font-bold text-white"><a href="#" class="hover:text-primary transition-colors tr" data-en="Factory Layout" data-ar="تخطيط مصنع صناعي">Factory Layout</a></h3>
+	    				<span class="text-primary text-sm font-medium tr" data-en="Industrial Eng." data-ar="هندسة صناعية">Industrial Eng.</span>
+	    			</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+    <section class="py-16 bg-white dark:bg-darkCard shadow-inner overflow-hidden">
+    	<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center opacity-0 reveal-up">
+          <div class="hover:scale-105 transition-transform duration-300">
+            <strong class="text-5xl font-black text-primary block mb-2">15</strong>
+            <span class="text-base font-semibold tr" data-en="Awards" data-ar="جوائز هندسية">Awards</span>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <strong class="text-5xl font-black text-primary block mb-2">120</strong>
+            <span class="text-base font-semibold tr" data-en="Complete Projects" data-ar="مشاريع مكتملة">Complete Projects</span>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <strong class="text-5xl font-black text-primary block mb-2">85</strong>
+            <span class="text-base font-semibold tr" data-en="Happy Clients" data-ar="عميل راضٍ">Happy Clients</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 overflow-hidden" id="contact-section">
+      <div class="container mx-auto px-4">
+      	<div class="text-center mb-16 opacity-0 reveal-up">
+            <span class="text-6xl lg:text-8xl font-black opacity-5 uppercase block text-gray-400 dark:text-gray-600 leading-none tr select-none" data-en="Contact" data-ar="تواصل">Contact</span>
+            <h2 class="text-3xl font-black mb-4 mt-[-20px] text-[#111] dark:text-white tr" data-en="Contact Me" data-ar="تواصل معي">Contact Me</h2>
+            <p class="text-gray-500 dark:text-gray-400 tr" data-en="Feel free to reach out via WhatsApp using the form below." data-ar="لا تتردد في التواصل معي عبر الواتساب من خلال النموذج أدناه.">Feel free to reach out via WhatsApp using the form below.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 opacity-0 reveal-up">
+          <div class="bg-white dark:bg-darkCard p-6 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition-all duration-300">
+          	<div class="text-3xl text-primary mb-4"><i class="fa-solid fa-map-location-dot"></i></div>
+          	<h3 class="text-lg font-bold mb-2 text-[#111] dark:text-white tr" data-en="Address" data-ar="العنوان">Address</h3>
+	          <p class="text-sm text-gray-500 dark:text-gray-400 tr" data-en="Dubai, United Arab Emirates" data-ar="دبي، الإمارات العربية المتحدة">Dubai, United Arab Emirates</p>
+	        </div>
+          <div class="bg-white dark:bg-darkCard p-6 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition-all duration-300">
+          	<div class="text-3xl text-primary mb-4"><i class="fa-solid fa-phone"></i></div>
+          	<h3 class="text-lg font-bold mb-2 text-[#111] dark:text-white tr" data-en="Contact Number" data-ar="رقم الهاتف">Contact Number</h3>
+	          <p class="text-sm"><a href="tel://1234567920" dir="ltr" class="hover:text-primary transition-colors">+971 1234 5678</a></p>
+	        </div>
+          <div class="bg-white dark:bg-darkCard p-6 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition-all duration-300">
+          	<div class="text-3xl text-primary mb-4"><i class="fa-solid fa-envelope"></i></div>
+          	<h3 class="text-lg font-bold mb-2 text-[#111] dark:text-white tr" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</h3>
+	          <p class="text-sm"><a href="mailto:eng.ahmed@example.com" class="hover:text-primary transition-colors">eng.ahmed@example.com</a></p>
+	        </div>
+          <div class="bg-white dark:bg-darkCard p-6 rounded-lg text-center shadow-md border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition-all duration-300">
+          	<div class="text-3xl text-primary mb-4"><i class="fa-solid fa-globe"></i></div>
+          	<h3 class="text-lg font-bold mb-2 text-[#111] dark:text-white tr" data-en="Website" data-ar="الموقع">Website</h3>
+	          <p class="text-sm"><a href="#" class="hover:text-primary transition-colors">myportfolio.com</a></p>
+	        </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 opacity-0 reveal-up">
+          <div class="w-full lg:w-1/2 bg-white dark:bg-darkCard p-8 lg:p-12 order-2 lg:order-1">
+            <form id="whatsappForm" class="space-y-4" onsubmit="sendToWhatsApp(event)">
+              <div>
+                <input type="text" id="wa_name" class="w-full bg-gray-50 dark:bg-[#2a2a2a] border border-gray-300 dark:border-gray-700 rounded-md p-3 focus:outline-none focus:border-primary text-[#111] dark:text-white transition-colors tr-ph" data-en-ph="Your Name" data-ar-ph="الاسم بالكامل" placeholder="Your Name" required>
+              </div>
+              <div>
+                <input type="email" id="wa_email" class="w-full bg-gray-50 dark:bg-[#2a2a2a] border border-gray-300 dark:border-gray-700 rounded-md p-3 focus:outline-none focus:border-primary text-[#111] dark:text-white transition-colors tr-ph" data-en-ph="Your Email" data-ar-ph="البريد الإلكتروني" placeholder="Your Email" required>
+              </div>
+              <div>
+                <input type="text" id="wa_subject" class="w-full bg-gray-50 dark:bg-[#2a2a2a] border border-gray-300 dark:border-gray-700 rounded-md p-3 focus:outline-none focus:border-primary text-[#111] dark:text-white transition-colors tr-ph" data-en-ph="Subject" data-ar-ph="موضوع الرسالة" placeholder="Subject" required>
+              </div>
+              <div>
+                <textarea id="wa_message" cols="30" rows="6" class="w-full bg-gray-50 dark:bg-[#2a2a2a] border border-gray-300 dark:border-gray-700 rounded-md p-3 focus:outline-none focus:border-primary text-[#111] dark:text-white transition-colors tr-ph" data-en-ph="Message" data-ar-ph="اكتب رسالتك هنا..." placeholder="Message" required></textarea>
+              </div>
+              <div>
+                <button type="submit" class="w-full sm:w-auto bg-primary hover:bg-amber-500 hover:scale-105 active:scale-95 text-[#111] font-bold py-3 px-8 rounded-md transition-all tr" data-en="Send via WhatsApp" data-ar="إرسال عبر واتساب">Send via WhatsApp</button>
+              </div>
+            </form>
+          </div>
+          <div class="w-full lg:w-1/2 min-h-[300px] bg-cover bg-center order-1 lg:order-2" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600');"></div>
+        </div>
+      </div>
+    </section>
+		
+    <footer class="bg-gray-200 dark:bg-[#0d0d0d] py-8 border-t border-gray-300 dark:border-gray-900 mt-12 text-center">
+      <div class="container mx-auto px-4">
+        <p class="text-sm font-medium">
+          <span class="tr" data-en="Copyright &copy;" data-ar="حقوق النشر &copy;">Copyright &copy;</span> 
+          <span id="yearSlot"></span> 
+          <span class="tr" data-en="All rights reserved | Made for Engineers" data-ar="جميع الحقوق محفوظة | تصميم مخصص للمهندسين">All rights reserved | Made for Engineers</span>
+        </p>
+      </div>
+    </footer>
+
+  <script>
+      const langToggleBtn = document.getElementById('langToggle');
+      const themeToggleBtn = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const htmlTag = document.documentElement;
+      document.getElementById('yearSlot').innerText = new Date().getFullYear();
+
+      let currentLang = localStorage.getItem('siteLang') || 'en';
+      let currentTheme = localStorage.getItem('siteTheme') || 'light'; 
+
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      menuToggle.addEventListener('click', () => {
+          navMenu.classList.toggle('hidden');
+          navMenu.classList.toggle('flex');
+      });
+
+      /* --- إعدادات السلايدر الذكي مع إعادة تفعيل الأنيميشن --- */
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide-item');
+      let slideInterval;
+
+      function showSlide(index) {
+          slides.forEach((slide) => {
+              slide.classList.remove('active');
+              // إزالة الأنيميشن من الكلمات الداخلية لإعادة تشغيله عند الظهور مجدداً
+              const animatedEls = slide.querySelectorAll('.animate__animated');
+              animatedEls.forEach(el => {
+                  el.style.animation = 'none';
+                  el.offsetHeight; /* Trigger reflow */
+                  el.style.animation = null;
+              });
+          });
+          currentSlide = (index + slides.length) % slides.length;
+          slides[currentSlide].classList.add('active');
+      }
+
+      function startSlider() {
+          clearInterval(slideInterval);
+          slideInterval = setInterval(() => {
+              showSlide(currentSlide + 1);
+          }, 6000); 
+      }
+
+      function rebuildSlider(lang) {
+          showSlide(0);
+          startSlider();
+      }
+
+      function applyLanguage(lang) {
+          currentLang = lang;
+          localStorage.setItem('siteLang', lang);
+          
+          htmlTag.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+          htmlTag.setAttribute('lang', lang);
+          
+          langToggleBtn.innerText = lang === 'ar' ? 'EN' : 'عربي';
+
+          document.querySelectorAll('.tr').forEach(el => {
+              el.innerHTML = el.getAttribute(`data-${lang}`);
+          });
+
+          document.querySelectorAll('.tr-ph').forEach(el => {
+              el.setAttribute('placeholder', el.getAttribute(`data-${lang}-ph`));
+          });
+
+          rebuildSlider(lang);
+      }
+
+      function applyTheme(theme) {
+          currentTheme = theme;
+          localStorage.setItem('siteTheme', theme);
+
+          // إضافة أنيميشن دوران جميل للأيقونة عند الضغط
+          themeIcon.classList.add('animate__animated', 'animate__rotateIn');
+          setTimeout(() => themeIcon.classList.remove('animate__animated', 'animate__rotateIn'), 500);
+
+          if(theme === 'dark') {
+              htmlTag.classList.add('dark');
+              themeIcon.className = 'fa-solid fa-sun'; 
+          } else {
+              htmlTag.classList.remove('dark');
+              themeIcon.className = 'fa-solid fa-moon'; 
+          }
+      }
+
+      langToggleBtn.addEventListener('click', () => { applyLanguage(currentLang === 'en' ? 'ar' : 'en'); });
+      themeToggleBtn.addEventListener('click', () => { applyTheme(currentTheme === 'light' ? 'dark' : 'light'); });
+
+      /* --- كود عبقري للأنيميشن عند السكرول (Scroll Reveal) --- */
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.15
+      };
+
+      const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('revealed');
+                  
+                  // إذا كان العنصر يحتوي على أشرطة مهارات، يتم تحريكها بالتوازي
+                  const progresses = entry.target.querySelectorAll('.skill-progress');
+                  progresses.forEach(p => p.classList.remove('scale-x-0'));
+                  
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+
+      // بدء التشغيل الفوري بعد تحميل الصفحة
+      window.addEventListener('DOMContentLoaded', () => {
+          applyLanguage(currentLang);
+          applyTheme(currentTheme);
+
+          // ربط العناصر المراد إظهارها بالمراقب المباشر
+          document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => {
+              scrollObserver.observe(el);
+          });
+      });
+
+      function sendToWhatsApp(event) {
+          event.preventDefault(); 
+
+          var name = document.getElementById('wa_name').value;
+          var email = document.getElementById('wa_email').value;
+          var subject = document.getElementById('wa_subject').value;
+          var message = document.getElementById('wa_message').value;
+
+          var phoneNumber = "201211934816"; 
+
+          var whatsappMessage = "";
+          if (currentLang === 'ar') {
+              whatsappMessage = "مرحباً مهندس، رسالة جديدة من موقعك:%0a%0a" +
+                                "*الاسم:* " + name + "%0a" +
+                                "*البريد:* " + email + "%0a" +
+                                "*الموضوع:* " + subject + "%0a" +
+                                "*الرسالة:* " + message;
+          } else {
+              whatsappMessage = "Hello Eng., new message from your website:%0a%0a" +
+                                "*Name:* " + name + "%0a" +
+                                "*Email:* " + email + "%0a" +
+                                "*Subject:* " + subject + "%0a" +
+                                "*Message:* " + message;
+          }
+
+          var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + whatsappMessage;
+          window.open(whatsappURL, '_blank');
+      }
+  </script>
+  </body>
+</html>
