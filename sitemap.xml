@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- الصفحة الرئيسية لـ Mentra Web -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- النموذج الأول: السيرة الذاتية -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me1/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me1/projects.html</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- النموذج الثاني: المعرض الإبداعي -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me2/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- النموذج الثالث: الاستشاري المستقل -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me3/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- النموذج الرابع: المدربين -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me4/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- النموذج الخامس: المهندسين -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me5/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- النموذج السادس: الأطباء -->
+  <url>
+    <loc>https://mentratech1.github.io/MentraWeb/me6/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

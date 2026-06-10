@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# الإشارة إلى ملف الـ Sitemap لمساعدة عناكب بحث جوجل
+Sitemap: https://mentratech1.github.io/MentraWeb/sitemap.xml
